@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
+/*   Updated: 2023/01/30 15:53:57 by aoumad           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_HPP
 #define CUB3D_HPP
 
@@ -89,6 +101,13 @@ typedef struct s_mlx
     int     endian;
 }               t_mlx;
 
+// file descriptor struct
+typedef struct s_fd
+{
+    int     fd;
+    char    *line;
+}               t_fd;
+
 // parsing struct
 typedef struct s_parse
 {
@@ -107,7 +126,24 @@ typedef struct s_parse
     int     player_x;
     int     player_y;
     char    player_dir;
-    int     save;
     t_mlx   *s_mlx;
+    t_fd    *s_fd;
 }               t_parse;
 
+
+// parsing functions //
+void    init_data(t_parse *parse);
+void    ft_helper();
+t_parse ft_parse(char **argv, t_parse *parse);
+// void    ft_check_args(char **argv, t_parse *parse);
+void    ft_check_file(char *file, t_parse *parse);
+void    ft_check_map(char **map, t_parse *parse);
+void    ft_check_map_chars(char **map, t_parse *parse);
+void    ft_check_map_walls(char **map, t_parse *parse);
+void    ft_check_map_player(char **map, t_parse *parse);
+void    ft_check_map_surrounded(char **map, t_parse *parse);
+void    ft_check_map_closed(char **map, t_parse *parse);
+void    ft_check_map_valid(char **map, t_parse *parse);
+void    ft_check_map_valid_helper(char **map, int x, int y, int *visited);
+
+#endif
