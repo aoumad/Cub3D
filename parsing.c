@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/01/30 19:16:49 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/01/31 16:38:12 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,45 @@ void    ft_read_file(char *file, t_parse *parse)
     parse->map = ft_split(buf, '\n');
 }
 
+void    ft_duplicate_pattern(int *tab, char *map)
+{
+    if (tab[(unsigned int)map[0]] == 0)
+        tab[(unsigned int)map[0]] = 1;
+    else
+        ft_error("Error\nDuplicate pattern\n");
+    
+    if (ft_isspace(map[2]))
+        ft_error("Error\nInvalid pattern\n");
+}
+void    ft_check_map2(int *tab, char *map)
+{
+    int i;
+    int tab[256] = {};
+    i = 0;
+    if (map[0] == 'N' && map[1] == 'O')
+        ft_duplicate_pattern(&tab, map);
+    else if (map[0] == 'S' && map[1] == 'O')
+        ft_duplicate_pattern(&tab, map);
+    else if (map[0] == 'W' && map[1] == 'E')
+        ft_duplicate_pattern(&tab, map);
+    else if (map[0] == 'E' && map[1] == 'A')
+        ft_duplicate_pattern(&tab, map);
+    else if (map[0] == 'F' &&)
+    {
+        ft_duplicate_pattern(&tab, map);
+        // check if map[1] has isspace 
+        // need to call a function to see the range of rgb and also `,` if exists between them
+    }
+    else if (map[0] == 'C')
+    {
+        ft_duplicate_pattern(&tab, map);
+        // same here
+    }
+}
+
 void    ft_check_map(t_parse *parse)
 {
+    int tab[256] = {};
     int i;
     int j;
 
@@ -109,57 +146,11 @@ void    ft_check_map(t_parse *parse)
     {
         if (parse->map == NULL)
             ft_error("Error\nEmpty map\n");
+        if (parse->map[i][0] == 'N' || parse->map[i][0] == 'S' || parse->map[i][0] == 'W' ||
+            parse->map[i][0] == 'C' || parse->map[i][0] == 'E')
+            ft_check_map2(&tab, parse->map[i]);
         if (parse->map[i][j] == '1' || parse->map[i][j] == '0' || parse->map[i][j] == ' ')
             j++;
+        if (parse->map[i][j] == )
     }
 }
-
-/*
-function check duplicate
-    
-    int tab[256] = {};
-        while (parse->map[i][j])
-        {
-            if (parse->map[i][0] == 'W' && parse->map[i][1] == 'E')
-            {
-                if (tab[(unsigned int)parse->map[i][0]] == 1)
-                    ft_error("Error\nDuplicate path\n");
-                tab[(unsigned int)parse->map[i][0]] = 1;
-                j++;
-            }
-            else if (parse->map[i][0] == 'E' && parse->map[i][1] == 'A')
-            {
-                if (tab[(unsigned int)parse->map[i][0]] == 1)
-                    ft_error("Error\nDuplicate path\n");
-                tab[(unsigned int)parse->map[i][0]] = 1;
-            }
-            else if (parse->map[i][0] == 'N' && parse->map[i][1] == 'O')
-            {
-                if (tab[(unsigned int)parse->map[i][0]] == 1)
-                    ft_error("Error\nDuplicate path\n");
-                tab[(unsigned int)parse->map[i][0]] = 1;
-            }
-            else if (parse->map[i][0] == 'S' && parse->map[i][1] == 'O')
-            {
-                if (tab[(unsigned int)parse->map[i][0]] == 1)
-                    ft_error("Error\nDuplicate path\n");
-                tab[(unsigned int)parse->map[i][0]] = 1;
-            }
-            else if (parse->map[i][0] == 'R')
-            {
-                if (tab[(unsigned int)parse->map[i][0]] == 1)
-                    ft_error("Error\nDuplicate resolution\n");
-                tab[(unsigned int)parse->map[i][0]] = 1;
-            }
-            else if (parse->map[i][0] == 'F')
-            {
-                if (tab[(unsigned int)parse->map[i][0]] == 1)
-                    ft_error("Error\nDuplicate floor color\n");
-                tab[(unsigned int)parse->map[i][0]] = 1;
-            }
-            else if (parse->map[i][0] == 'C')
-            {
-                if (tab[(unsigned int)parse->map[i][0]] == 1)
-                    ft_error("Error\nDuplicate ceiling color\n");
-                tab[(unsigned int)parse->map[i][0]] = 1;
-            }*/

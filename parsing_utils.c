@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:14 by aoumad            #+#    #+#             */
-/*   Updated: 2023/01/30 15:33:16 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/01/31 16:22:16 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,12 @@ void    ft_error(char *str)
     // rememeber i need to call free here and pass struct to free it
     printf("%s", str);
     exit(1);
+}
+
+int     ft_isspace(char c)
+{
+    if (c == ' ' || c == '\t' || c == '\n' ||
+        c == '\v' || c == '\f' || c == '\r')
+        return (1);
+    return (0);
 }
