@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:14 by aoumad            #+#    #+#             */
-/*   Updated: 2023/01/31 16:22:16 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/02 12:32:56 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,13 @@ void    ft_error(char *str)
     exit(1);
 }
 
-int     ft_isspace(char c)
+int     ft_isspace(char *map, int index)
 {
-    if (c == ' ' || c == '\t' || c == '\n' ||
-        c == '\v' || c == '\f' || c == '\r')
-        return (1);
-    return (0);
+    int i = index;
+    while (map[index] == ' ' || map[index] == '\t' || map[index] == '\n' ||
+        map[index] == '\v' || map[index] == '\f' || map[index] == '\r')
+        index++;
+    if (i == index)
+        return (0);
+    return (i);
 }

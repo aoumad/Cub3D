@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/01/31 19:23:47 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/02 12:35:06 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,14 @@
 
 #define MAX_INT 2147483647
 
+// enum struct
+typedef enum e_flag
+{
+    NONE,
+    PATH_FLAG,
+    FC_FLAG
+}   t_flag;
+
 // mlx struct
 typedef struct s_mlx
 {
@@ -139,7 +147,7 @@ t_parse ft_parse(char **argv, t_parse *parse);
 void    ft_check_file(char *file, t_parse *parse);
 void    ft_check_map(t_parse *parse);
 void    ft_check_map2(int *tab, char *map);
-void    ft_duplicate_pattern(int *tab, char *map);
+void    ft_duplicate_pattern(int *tab, char *map, int flag);
 void    ft_check_map_chars(char **map, t_parse *parse);
 void    ft_check_map_walls(char **map, t_parse *parse);
 void    ft_check_map_player(char **map, t_parse *parse);
@@ -148,7 +156,10 @@ void    ft_check_map_closed(char **map, t_parse *parse);
 void    ft_check_map_valid(char **map, t_parse *parse);
 void    ft_check_map_valid_helper(char **map, int x, int y, int *visited);
 
+void    ft_check_texture_path(char *map, int i);
+void    ft_check_color(char *map, int i);
+
 
 // utils functions //
-int     ft_isspace(char c);
+int     ft_isspace(char *map, int index);
 #endif
