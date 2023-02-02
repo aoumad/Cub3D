@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/02 12:38:21 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/02 19:07:08 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,14 @@ void    ft_duplicate_pattern(int *tab, char *map, int flag)
         i = ft_isspace(map, 2);
         if (i == 0)
             ft_error("Error\nInvalid pattern\n");
-        ft_check_texture_path(map, ++i);
+        ft_check_texture_path(map, i);
     }
     else if (flag == FC_FLAG)
     {
         i = ft_isspace(map, 1);
         if (i == 0)
             ft_error("Error\nInvalid pattern\n");
-        ft_check_color(map, ++i);
+        ft_check_color(map, i, 0);
     }
 }
 void    ft_check_map2(int *tab, char *map)
@@ -137,16 +137,9 @@ void    ft_check_map2(int *tab, char *map)
     else if (map[0] == 'E' && map[1] == 'A')
         ft_duplicate_pattern(&tab, map, PATH_FLAG);
     else if (map[0] == 'F')
-    {
         ft_duplicate_pattern(&tab, map, FC_FLAG);
-        // check if map[1] has isspace 
-        // need to call a function to see the range of rgb and also `,` if exists between them
-    }
     else if (map[0] == 'C')
-    {
         ft_duplicate_pattern(&tab, map, FC_FLAG);
-        // same here
-    }
 }
 
 void    ft_check_map(t_parse *parse)
@@ -161,14 +154,161 @@ void    ft_check_map(t_parse *parse)
     {
         if (parse->map == NULL)
             ft_error("Error\nEmpty map\n");
+        parse->s_cor->x = i;
+        parse->s_cor->y = j;
+        ft_isspace_2D(parse->map, &parse->s_cor);
+        i = parse->s_cor->x;
+        j = parse->s_cor->y;
         if (parse->map[i][0] == 'N' || parse->map[i][0] == 'S' || parse->map[i][0] == 'W' ||
             parse->map[i][0] == 'C' || parse->map[i][0] == 'E' || parse->map[i][0] == 'F')
             {
                 ft_check_map2(&tab, parse->map[i]);
                 i++;
             }
-        if (parse->map[i][j] == '1' || parse->map[i][j] == '0' || parse->map[i][j] == ' ')
-            j++;
-        
+        if (tab[(unsigned int)'N'] == 1 && tab[(unsigned int)'S'] == 1 && tab[(unsigned int)'W'] == 1 && 
+            tab[(unsigned int)'E'] == 1 && tab[(unsigned int)'F'] == 1 && tab[(unsigned int)'C'] == 1)
+            break;
     }
+    ft_half_done(&tab);
+    ft_second_half_checker(&parse, &tab, i, j);
+}
+/* parsing this part of the map 
+            1111111111111111111111111
+        1000000000110000000000001
+        1011000001110000000000001
+1001000000000000000000001
+111111111011000001110000000000001
+100000000011000001110111111111111
+11110111111111011100000010001
+11110111111111011101010010001
+11000000110101011100000010001
+10000000000000001100000010001
+10000000000000001101010010001
+11000001110101011111011110N0111
+11110111 1110101 101111010001
+11111111 1111111 111111111111*/
+void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j)
+{
+    ft_check_map_closed(parse, i, j);
+    parse->s_cor->x = i;
+    parse->s_cor->y = j;
+    ft_isspace_2D(parse->map, &parse->s_cor);
+    i = parse->s_cor->x;
+    j = parse->s_cor->y;
+    while (parse->map[i][j])
+    {
+        if (parse->map[i][j] == '0' || parse->map[i][j] == '1' || parse->map[i][j] == ' ' || parse->map[i][j] == '\t')
+            j++;
+        if (parse->map[i][j] == '\n')
+        {
+            i++;
+            j = 0;
+        }
+        if (parse->map[i][j] == 'N' || parse->map[i][j] == 'S' || parse->map[i][j] == 'W' || parse->map[i][j] == 'E')
+        {
+            if (tab[(unsigned int)ft_tolower(parse->map[i][j])] == 1)
+                ft_error("Error\nDuplicate player position\n");
+            else if (tab[(unsigned int)ft_tolower(parse->map[i][j])] == 0)
+            {
+                tab[(unsigned int)ft_tolower(parse->map[i][j])] = 1;
+                parse->player_x = i;
+                parse->player_y = j;
+                parse->player_dir = parse->map[i][j];
+                j++;
+            }
+        }
+    }
+}
+
+    // check that map walls is surrounded by 1 ==> walls using dfs
+void    ft_check_map_closed(t_parse *parse)
+{
+    int i;
+    int j;
+    int k;
+    int l;
+    int flag;
+    int **visited;
+    
+    i = 0;
+    j = 0;
+    k = 0;
+    l = 0;
+    flag = 0;
+    visited = (int **)malloc(sizeof(int *) * parse->s_cor->x);
+    while (i < parse->s_cor->x)
+    {
+        visited[i] = (int *)malloc(sizeof(int) * parse->s_cor->y);
+        i++;
+    }
+    i = 0;
+    while (i < parse->s_cor->x)
+    {
+        j = 0;
+        while (j < parse->s_cor->y)
+        {
+            visited[i][j] = 0;
+            j++;
+        }
+        i++;
+    }
+    i = 0;
+    while (i < parse->s_cor->x)
+    {
+        j = 0;
+        while (j < parse->s_cor->y)
+        {
+            if (parse->map[i][j] == '1' && (ft_edges_checker(parse->map, i, j) == 1))
+            {
+                visited[i][j] = 1;
+                k = i;
+                l = j;
+                ft_dfs(parse, visited, &k, &l, &flag);
+            }
+            else if (parse->map[i][j] == '0' && (ft_edges_checker(parse->map, i, j) == 1))
+                ft_error("Error\nMap is not closed\n");
+            j++;
+        }
+        i++;
+    }
+    if (flag == 1)
+        ft_error("Error\nMap is not closed\n");
+}
+
+int ft_edges_checker(char **map, int i, int j)
+{
+    if (ft_standard_isspace(map[i][j + 1] == 1) || ft_standard_isspace(map[i][j - 1] == 1) ||
+        ft_standard_isspace(map[i + 1][j] == 1) || ft_standard_isspace(map[i - 1][j] == 1))
+        return (1);
+    return (0);
+}
+
+void    ft_dfs(t_parse *parse, int **visited, int *i, int *j, int *flag)
+{
+    if (parse->map[*i][*j] == '1' && (ft_edges_checker(parse->map, *i, *j) == 1))
+    {
+        visited[*i][*j] = 1;
+        if (parse->map[*i][*j + 1] == '1' && visited[*i][*j + 1] == 0)
+        {
+            *j = *j + 1;
+            ft_dfs(parse, visited, i, j, flag);
+        }
+        if (parse->map[*i][*j - 1] == '1' && visited[*i][*j - 1] == 0)
+        {
+            *j = *j - 1;
+            ft_dfs(parse, visited, i, j, flag);
+        }
+        if (parse->map[*i + 1][*j] == '1' && visited[*i + 1][*j] == 0)
+        {
+            *i = *i + 1;
+            ft_dfs(parse, visited, i, j, flag);
+        }
+        if (parse->map[*i - 1][*j] == '1' && visited[*i - 1][*j] == 0)
+        {
+            *i = *i - 1;
+            ft_dfs(parse, visited, i, j, flag);
+        }
+    }
+    else if (parse->map[*i][*j] == '0' && (ft_edges_checker(parse->map, *i, *j) == 1))
+        *flag = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/02 12:35:06 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/02 19:09:34 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@
 #define C 6
 
 #define MAX_INT 2147483647
+typedef struct s_parse;
 
 // enum struct
 typedef enum e_flag
@@ -116,6 +117,13 @@ typedef struct s_fd
     char    *line;
 }               t_fd;
 
+typedef struct s_cor
+{
+    int     x;
+    int     y;
+}               t_cor;
+}
+
 // parsing struct
 typedef struct s_parse
 {
@@ -136,6 +144,7 @@ typedef struct s_parse
     char    player_dir;
     t_mlx   *s_mlx;
     t_fd    *s_fd;
+    t_cor   *s_cor;
 }               t_parse;
 
 
@@ -152,14 +161,20 @@ void    ft_check_map_chars(char **map, t_parse *parse);
 void    ft_check_map_walls(char **map, t_parse *parse);
 void    ft_check_map_player(char **map, t_parse *parse);
 void    ft_check_map_surrounded(char **map, t_parse *parse);
-void    ft_check_map_closed(char **map, t_parse *parse);
+void    ft_check_map_closed(t_parse *parse);
 void    ft_check_map_valid(char **map, t_parse *parse);
 void    ft_check_map_valid_helper(char **map, int x, int y, int *visited);
 
 void    ft_check_texture_path(char *map, int i);
-void    ft_check_color(char *map, int i);
-
+void    ft_check_color(char *map, int i, int row);
+void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j);
+void    ft_dfs(t_parse *parse, int **visited, int *i, int *j, int *flag);
 
 // utils functions //
 int     ft_isspace(char *map, int index);
+int    ft_half_done(int *tab);
+int	    ft_atoi_color(const char *str, int begin, int end);
+void    ft_isspace_2D(char **map, t_cor *s_cor);
+int     ft_standard_isspace(char c);
+int     ft_edges_checker(char **map, int i, int j);
 #endif

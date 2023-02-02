@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:30 by aoumad            #+#    #+#             */
-/*   Updated: 2023/01/30 15:48:18 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/02 18:44:00 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,4 @@ void    ft_check_arg(char **arg)
     if (arg[2])
         ft_error("Error\nToo many arguments\n");
 }
+
