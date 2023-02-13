@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/02 19:07:08 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/13 12:57:22 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,55 +19,6 @@ t_parse ft_parse(char **arg, t_parse *parse)
     ft_read_file(arg[1], &parse);
     ft_check_map(&parse);
 }
-
-// void    ft_check_file(char *file, t_parse *parse)
-// {
-//     int fd;
-//     char *line;
-//     int ret;
-//     char *buf;
-//     int i;
-
-//     i = 0;
-//     fd = open(file, O_RDONLY);
-//     if (fd == -1)
-//         ft_error("Error\nopen() failed\n");
-//     // get_next_line only take fd as a parameter
-//     line = get_next_line(fd);
-//     while (line)
-//     {
-//         if (line[0] == '\n')
-//         {
-//             line[0] = ' ';
-//             line[1] = '\n';
-//             line[2] = '\0';
-//         }
-//         if (line[0] == 'R')
-//             ft_check_res(line, parse);
-//         else if (line[0] == 'N' && line[1] == 'O')
-//             ft_check_path(line, parse, 'N');
-//         else if (line[0] == 'S' && line[1] == 'O')
-//             ft_check_path(line, parse, 'S');
-//         else if (line[0] == 'W' && line[1] == 'E')
-//             ft_check_path(line, parse, 'W');
-//         else if (line[0] == 'E' && line[1] == 'A')
-//             ft_check_path(line, parse, 'E');
-//         else if (line[0] == 'F')
-//             ft_check_color(line, parse, 'F');
-//         else if (line[0] == 'C')
-//             ft_check_color(line, parse, 'C');
-//         else if (line[0] == '1' || line[0] == '0')
-//             ft_check_map(line, parse);
-//         else if (line[0] == '\0')
-//             ft_error("Error\nEmpty line\n");
-//         else
-//             ft_error("Error\nInvalid line\n");
-//         free(line);
-//         line = get_next_line(fd);
-//     }
-//     close(fd);
-// }
-
 
 void    ft_read_file(char *file, t_parse *parse)
 {
@@ -102,6 +53,7 @@ void    ft_duplicate_pattern(int *tab, char *map, int flag)
 {
     int i;
     
+    i = 0;
     if (tab[(unsigned int)map[0]] == 0)
         tab[(unsigned int)map[0]] = 1;
     else
@@ -122,12 +74,11 @@ void    ft_duplicate_pattern(int *tab, char *map, int flag)
         ft_check_color(map, i, 0);
     }
 }
+
 void    ft_check_map2(int *tab, char *map)
 {
-    int i;
     int tab[256] = {};
     
-    i = 0;
     if (map[0] == 'N' && map[1] == 'O')
         ft_duplicate_pattern(&tab, map, PATH_FLAG);
     else if (map[0] == 'S' && map[1] == 'O')
@@ -172,21 +123,8 @@ void    ft_check_map(t_parse *parse)
     ft_half_done(&tab);
     ft_second_half_checker(&parse, &tab, i, j);
 }
-/* parsing this part of the map 
-            1111111111111111111111111
-        1000000000110000000000001
-        1011000001110000000000001
-1001000000000000000000001
-111111111011000001110000000000001
-100000000011000001110111111111111
-11110111111111011100000010001
-11110111111111011101010010001
-11000000110101011100000010001
-10000000000000001100000010001
-10000000000000001101010010001
-11000001110101011111011110N0111
-11110111 1110101 101111010001
-11111111 1111111 111111111111*/
+
+
 void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j)
 {
     ft_check_map_closed(parse, i, j);

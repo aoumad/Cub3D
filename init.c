@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:30 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/02 18:44:00 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/13 12:37:11 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ void    init_data(t_parse *parse)
     parse->player_x = -1;
     parse->player_y = -1;
     parse->player_dir = '\0';
+    parse->s_mlx = malloc(sizeof(t_mlx));
+    parse->s_mlx->mlx = NULL;
+    parse->s_mlx->win = NULL;
+    parse->s_mlx->img = NULL;
+    parse->s_mlx->addr = NULL;
+    parse->s_mlx->bits_per_pixel = 0;
+    parse->s_mlx->line_length = 0;
+    parse->s_mlx->endian = 0;
 }
 
 /*
@@ -56,4 +64,3 @@ void    ft_check_arg(char **arg)
     if (arg[2])
         ft_error("Error\nToo many arguments\n");
 }
-

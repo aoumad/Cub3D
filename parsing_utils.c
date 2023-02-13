@@ -6,35 +6,11 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:14 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/02 18:47:31 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/13 12:56:46 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// int main(int argc, char **argv)
-// {
-//     t_parse  parse;
-    
-//     if (argc != 2)
-//         ft_helper();
-//     else
-//     {
-//         parse = ft_parse(argv[1]);
-//         ft_check_parse(parse);
-//         ft_init_mlx(&parse);
-//         ft_init_player(&parse);
-//         ft_init_textures(&parse);
-//         ft_init_sprites(&parse);
-//         ft_init_rays(&parse);
-//         ft_init_minimap(&parse);
-//         ft_init_img(&parse);
-//         ft_init_window(&parse);
-//         ft_init_hooks(&parse);
-//         ft_init_game(&parse);
-//     }
-//     return (0);
-// }
 
 void    ft_helper()
 {

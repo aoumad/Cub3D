@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/02 19:09:34 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/03 19:30:49 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ typedef struct s_cor
     int     x;
     int     y;
 }               t_cor;
-}
 
 // parsing struct
 typedef struct s_parse
