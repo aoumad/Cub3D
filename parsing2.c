@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
+
     // ./../texture/NO.xpm (generate parsing that handles that)
 void    ft_check_texture_path(char *map, int i)
 {
@@ -27,9 +29,31 @@ void    ft_check_texture_path(char *map, int i)
     ft_error("Error\nInvalid texture path\n");
 }
 
+void    ft_insert_color(int row, t_parse *parse, int flag, int num)
+{
+    if (flag == 0)
+    {
+        if (row == 0)
+            parse->f[0] = num;
+        else if (row == 1)
+            parse->f[1] = num;
+        else if (row == 2)
+            parse->f[2] = num;
+    }
+    else if (flag == 1)
+    {
+        if (row == 0)
+            parse->c[0] = num;
+        else if (row == 1)
+            parse->c[1] = num;
+        else if (row == 2)
+            parse->c[2] = num;
+    }
+}
+
 // F 220,100,0
 // C 225,30,0
-void    ft_check_color(char *map, int i, int row)
+void    ft_check_color(char *map, int i, int row, t_parse *parse, int j, int flag)
 {
     int j;
     int num;
@@ -40,6 +64,7 @@ void    ft_check_color(char *map, int i, int row)
     num = ft_atoi_color(map, j, i);
     if (num < 0 || num > 255)
         ft_error("Error\nInvalid color\n");
+    ft_insert_color(row, parse, flag, num);
     while (map[i] != ',')
         i++;
     if (map[i] != ',')

@@ -95,7 +95,8 @@ typedef enum e_flag
 {
     NONE,
     PATH_FLAG,
-    FC_FLAG
+    F_FLAG,
+    C_FLAG
 }   t_flag;
 
 // mlx struct
@@ -168,6 +169,7 @@ void    ft_check_texture_path(char *map, int i);
 void    ft_check_color(char *map, int i, int row);
 void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j);
 void    ft_dfs(t_parse *parse, int **visited, int *i, int *j, int *flag);
+void    ft_insert_color(int row, t_parse *parse, int flag, int num);
 
 // utils functions //
 int     ft_isspace(char *map, int index);

@@ -71,7 +71,7 @@ void    ft_duplicate_pattern(int *tab, char *map, int flag)
         i = ft_isspace(map, 1);
         if (i == 0)
             ft_error("Error\nInvalid pattern\n");
-        ft_check_color(map, i, 0);
+        ft_check_color(map, i, 0, &parse, flag);
     }
 }
 
@@ -88,9 +88,9 @@ void    ft_check_map2(int *tab, char *map)
     else if (map[0] == 'E' && map[1] == 'A')
         ft_duplicate_pattern(&tab, map, PATH_FLAG);
     else if (map[0] == 'F')
-        ft_duplicate_pattern(&tab, map, FC_FLAG);
+        ft_duplicate_pattern(&tab, map, F_FLAG);
     else if (map[0] == 'C')
-        ft_duplicate_pattern(&tab, map, FC_FLAG);
+        ft_duplicate_pattern(&tab, map, C_FLAG);
 }
 
 void    ft_check_map(t_parse *parse)
