@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:14 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/17 09:44:32 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/17 16:02:33 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void    ft_half_done(int *tab, t_parse *parse)
 
 void    ft_isspace_2D(char **map, t_cor *s_cor)
 {
-    int i = s_cor->x;
-    int j = s_cor->y;
     while (map[s_cor->y][s_cor->x] == ' ' || map[s_cor->y][s_cor->x] == '\t' || map[s_cor->y][s_cor->x] == '\n' ||
         map[s_cor->y][s_cor->x] == '\v' || map[s_cor->y][s_cor->x] == '\f' || map[s_cor->y][s_cor->x] == '\r')
     {

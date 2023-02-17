@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/17 12:12:43 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/17 16:19:33 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ t_parse ft_parse(char **arg, t_parse *parse)
     ft_check_arg(arg);
     ft_read_file(arg[1], parse);
     ft_check_map(parse);
+    return (*parse);
 }
 
 void    ft_read_file(char *file, t_parse *parse)
 {
     int fd;
     char *line;
-    int ret;
     char *buf;
     int i;
 
@@ -51,8 +51,11 @@ void    ft_read_file(char *file, t_parse *parse)
 
 void    ft_duplicate_pattern(int *tab, char *map, int flag, t_parse *parse)
 {
+    t_index index;
     int i;
     
+    index.i = 0;
+    index.j = 0;
     i = 0;
     if (tab[(unsigned int)map[0]] == 0)
         tab[(unsigned int)map[0]] = 1;
@@ -72,14 +75,12 @@ void    ft_duplicate_pattern(int *tab, char *map, int flag, t_parse *parse)
         i = ft_isspace(map, 1);
         if (i == 0)
             ft_error("Error\nInvalid pattern\n");
-        ft_check_color(i, 0, parse, flag);
+        ft_check_color(index, 0, map, flag, parse);
     }
 }
 
 void    ft_check_map2(int *tab, char *map, t_parse *parse)
 {
-    int tab[256] = {};
-    
     if (map[0] == 'N' && map[1] == 'O')
         ft_duplicate_pattern(tab, map, NO, parse);
     else if (map[0] == 'S' && map[1] == 'O')
@@ -108,7 +109,7 @@ void    ft_check_map(t_parse *parse)
             ft_error("Error\nEmpty map\n");
         parse->s_cor->x = i;
         parse->s_cor->y = j;
-        ft_isspace_2D(parse->map, &parse->s_cor);
+        ft_isspace_2D(parse->map, parse->s_cor);
         i = parse->s_cor->x;
         j = parse->s_cor->y;
         if (parse->map[i][0] == 'N' || parse->map[i][0] == 'S' || parse->map[i][0] == 'W' ||

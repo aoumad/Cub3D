@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:26:16 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/17 09:40:40 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/17 16:25:27 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,30 +53,29 @@ void    ft_insert_color(int row, t_parse *parse, int flag, int num)
 
 // F 220,100,0
 // C 225,30,0
-void    ft_check_color(int i, int row, t_parse *parse, int j, int flag)
+void    ft_check_color(t_index index, int row, char *map, int flag, t_parse *parse)
 {
-    int j;
     int num;
-
-    j = i;
-    while (ft_isdigit(parse->map[i]))
-        i++;
-    num = ft_atoi_color(parse->map, j, i);
+    
+    index.j = index.i;
+    while (ft_isdigit(map[index.i]))
+        index.i++;
+    num = ft_atoi_color(map, index.j, index.i);
     if (num < 0 || num > 255)
         ft_error("Error\nInvalid color\n");
     ft_insert_color(row, parse, flag, num);
-    while (parse->map[i] != ',')
-        i++;
-    if (parse->map[i] != ',')
+    while (map[index.i] != ',')
+        index.i++;
+    if (map[index.i] != ',')
         ft_error("Error\nno comma after color output\n");
-    i++;
+    index.i++;
     if (++row != 3)
-        ft_check_color(i, row, &parse, j, flag);
+        ft_check_color(index, row, map, flag, parse);
     if (row == 3)
     {
-        while (parse->map[i] == ' ' || parse->map[i] == '\t')
-            i++;
-        if (parse->map[i] == '\n')
+        while (map[index.i] == ' ' || map[index.i] == '\t')
+            index.i++;
+        if (map[index.i] == '\n')
             return ;
         else
             ft_error("Error\nInvalid map\n");

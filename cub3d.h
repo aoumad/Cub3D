@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/17 12:07:14 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/17 16:23:00 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,12 @@ typedef struct s_cor
     int     y;
 }               t_cor;
 
+typedef struct s_index
+{
+    int i;
+    int j;
+}           t_index;
+
 // parsing struct
 typedef struct s_parse
 {
@@ -168,7 +174,7 @@ void    ft_check_map_valid_helper(char **map, int x, int y, int *visited);
 void    ft_insert_texture_path(t_parse *parse, char *map, int flag);
 
 void    ft_check_texture_path(char *map, int i);
-void    ft_check_color(int i, int row, t_parse *parse, int j, int flag);
+void    ft_check_color(t_index index, int row, char *map, int flag, t_parse *parse);
 void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j);
 void    ft_dfs(t_parse *parse, int **visited, int *i, int *j, int *flag);
 void    ft_insert_color(int row, t_parse *parse, int flag, int num);
