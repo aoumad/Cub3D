@@ -6,11 +6,11 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:34 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/17 09:18:23 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/17 10:54:33 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h";
+#include "cub3d.h"
 
 int main(int argc, char **argv)
 {

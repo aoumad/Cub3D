@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/17 09:44:47 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/17 12:07:14 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 #include <limits.h>
 
 #include "mlx.h"
-#include "libft.h"
-#include "get_next_line.h"
+#include "libft/libft.h"
+#include "GNL/get_next_line.h"
 
 
 #define KEY_ESC 53
@@ -84,7 +84,7 @@
 #define C 6
 
 #define MAX_INT 2147483647
-typedef struct s_parse;
+// typedef struct s_parse;
 
 // enum struct
 typedef enum e_flag
@@ -152,8 +152,9 @@ typedef struct s_parse
 void    init_data(t_parse *parse);
 void    ft_helper();
 t_parse ft_parse(char **argv, t_parse *parse);
-// void    ft_check_args(char **argv, t_parse *parse);
-void    ft_check_file(char *file, t_parse *parse);
+void    ft_read_file(char *file, t_parse *parse);
+void    ft_check_arg(char **arg);
+// void    ft_check_file(char *file, t_parse *parse);
 void    ft_check_map(t_parse *parse);
 void    ft_check_map2(int *tab, char *map, t_parse *parse);
 void    ft_duplicate_pattern(int *tab, char *map, int flag, t_parse *parse);
@@ -164,6 +165,7 @@ void    ft_check_map_surrounded(char **map, t_parse *parse);
 void    ft_check_map_closed(t_parse *parse);
 void    ft_check_map_valid(char **map, t_parse *parse);
 void    ft_check_map_valid_helper(char **map, int x, int y, int *visited);
+void    ft_insert_texture_path(t_parse *parse, char *map, int flag);
 
 void    ft_check_texture_path(char *map, int i);
 void    ft_check_color(int i, int row, t_parse *parse, int j, int flag);
@@ -178,4 +180,5 @@ int	    ft_atoi_color(const char *str, int begin, int end);
 void    ft_isspace_2D(char **map, t_cor *s_cor);
 int     ft_standard_isspace(char c);
 int     ft_edges_checker(char **map, int i, int j);
+void    ft_error(char *str);
 #endif

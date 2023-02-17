@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:30 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/13 12:37:11 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/17 12:00:46 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void    init_data(t_parse *parse)
     parse->so = NULL;
     parse->we = NULL;
     parse->ea = NULL;
-    parse->s = NULL;
+    // parse->s = NULL;
     parse->f[0] = -1;
     parse->f[1] = -1;
     parse->f[2] = -1;

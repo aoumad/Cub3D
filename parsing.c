@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/17 09:43:10 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/17 12:12:43 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 t_parse ft_parse(char **arg, t_parse *parse)
 {
-    init_data(&parse);
+    init_data(parse);
     ft_check_arg(arg);
-    ft_read_file(arg[1], &parse);
-    ft_check_map(&parse);
+    ft_read_file(arg[1], parse);
+    ft_check_map(parse);
 }
 
 void    ft_read_file(char *file, t_parse *parse)
@@ -65,14 +65,14 @@ void    ft_duplicate_pattern(int *tab, char *map, int flag, t_parse *parse)
         if (i == 0)
             ft_error("Error\nInvalid pattern\n");
         ft_check_texture_path(map, i);
-        ft_insert_texture_path(&parse, map, flag);
+        ft_insert_texture_path(parse, map, flag);
     }
     else if (flag == F_FLAG || flag == C_FLAG)
     {
         i = ft_isspace(map, 1);
         if (i == 0)
             ft_error("Error\nInvalid pattern\n");
-        ft_check_color(i, 0, &parse, flag);
+        ft_check_color(i, 0, parse, flag);
     }
 }
 
@@ -81,17 +81,17 @@ void    ft_check_map2(int *tab, char *map, t_parse *parse)
     int tab[256] = {};
     
     if (map[0] == 'N' && map[1] == 'O')
-        ft_duplicate_pattern(&tab, map, NO, &parse);
+        ft_duplicate_pattern(tab, map, NO, parse);
     else if (map[0] == 'S' && map[1] == 'O')
-        ft_duplicate_pattern(&tab, map, SO, &parse);
+        ft_duplicate_pattern(tab, map, SO, parse);
     else if (map[0] == 'W' && map[1] == 'E')
-        ft_duplicate_pattern(&tab, map, WE, &parse);
+        ft_duplicate_pattern(tab, map, WE, parse);
     else if (map[0] == 'E' && map[1] == 'A')
-        ft_duplicate_pattern(&tab, map, EA, &parse);
+        ft_duplicate_pattern(tab, map, EA, parse);
     else if (map[0] == 'F')
-        ft_duplicate_pattern(&tab, map, F_FLAG, &parse);
+        ft_duplicate_pattern(tab, map, F_FLAG, parse);
     else if (map[0] == 'C')
-        ft_duplicate_pattern(&tab, map, C_FLAG, &parse);
+        ft_duplicate_pattern(tab, map, C_FLAG, parse);
 }
 
 void    ft_check_map(t_parse *parse)
@@ -114,15 +114,15 @@ void    ft_check_map(t_parse *parse)
         if (parse->map[i][0] == 'N' || parse->map[i][0] == 'S' || parse->map[i][0] == 'W' ||
             parse->map[i][0] == 'C' || parse->map[i][0] == 'E' || parse->map[i][0] == 'F')
             {
-                ft_check_map2(&tab, parse->map[i], &parse);
+                ft_check_map2(tab, parse->map[i], parse);
                 i++;
             }
         if (tab[(unsigned int)'N'] == 1 && tab[(unsigned int)'S'] == 1 && tab[(unsigned int)'W'] == 1 && 
             tab[(unsigned int)'E'] == 1 && tab[(unsigned int)'F'] == 1 && tab[(unsigned int)'C'] == 1)
             break;
     }
-    ft_half_done(&tab, parse);
-    ft_second_half_checker(&parse, &tab, i, j);
+    ft_half_done(tab, parse);
+    ft_second_half_checker(parse, tab, i, j);
 }
 
 
@@ -131,7 +131,7 @@ void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j)
     ft_check_map_closed(parse);
     parse->s_cor->x = i;
     parse->s_cor->y = j;
-    ft_isspace_2D(parse->map, &parse->s_cor);
+    ft_isspace_2D(parse->map, parse->s_cor);
     i = parse->s_cor->x;
     j = parse->s_cor->y;
     while (parse->map[i][j])
