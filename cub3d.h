@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/03 19:30:49 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/17 09:44:47 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,6 @@
 #define WEST 2
 #define EAST 3
 
-#define NO 0
-#define SO 1
-#define WE 2
-#define EA 3
 #define S 4
 #define F 5
 #define C 6
@@ -96,7 +92,11 @@ typedef enum e_flag
     NONE,
     PATH_FLAG,
     F_FLAG,
-    C_FLAG
+    C_FLAG,
+    NO,
+    SO,
+    WE,
+    EA
 }   t_flag;
 
 // mlx struct
@@ -133,7 +133,7 @@ typedef struct s_parse
     char    *so;
     char    *we;
     char    *ea;
-    char    *s;
+    // char    *s;
     int     f[3];
     int     c[3];
     char    **map;
@@ -155,8 +155,8 @@ t_parse ft_parse(char **argv, t_parse *parse);
 // void    ft_check_args(char **argv, t_parse *parse);
 void    ft_check_file(char *file, t_parse *parse);
 void    ft_check_map(t_parse *parse);
-void    ft_check_map2(int *tab, char *map);
-void    ft_duplicate_pattern(int *tab, char *map, int flag);
+void    ft_check_map2(int *tab, char *map, t_parse *parse);
+void    ft_duplicate_pattern(int *tab, char *map, int flag, t_parse *parse);
 void    ft_check_map_chars(char **map, t_parse *parse);
 void    ft_check_map_walls(char **map, t_parse *parse);
 void    ft_check_map_player(char **map, t_parse *parse);
@@ -166,14 +166,14 @@ void    ft_check_map_valid(char **map, t_parse *parse);
 void    ft_check_map_valid_helper(char **map, int x, int y, int *visited);
 
 void    ft_check_texture_path(char *map, int i);
-void    ft_check_color(char *map, int i, int row);
+void    ft_check_color(int i, int row, t_parse *parse, int j, int flag);
 void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j);
 void    ft_dfs(t_parse *parse, int **visited, int *i, int *j, int *flag);
 void    ft_insert_color(int row, t_parse *parse, int flag, int num);
 
 // utils functions //
 int     ft_isspace(char *map, int index);
-int    ft_half_done(int *tab);
+void    ft_half_done(int *tab, t_parse *parse);
 int	    ft_atoi_color(const char *str, int begin, int end);
 void    ft_isspace_2D(char **map, t_cor *s_cor);
 int     ft_standard_isspace(char c);

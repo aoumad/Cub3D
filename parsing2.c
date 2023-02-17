@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:26:16 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/02 16:34:34 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/17 09:40:40 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,32 +53,46 @@ void    ft_insert_color(int row, t_parse *parse, int flag, int num)
 
 // F 220,100,0
 // C 225,30,0
-void    ft_check_color(char *map, int i, int row, t_parse *parse, int j, int flag)
+void    ft_check_color(int i, int row, t_parse *parse, int j, int flag)
 {
     int j;
     int num;
 
     j = i;
-    while (ft_isdigit(map[i]))
+    while (ft_isdigit(parse->map[i]))
         i++;
-    num = ft_atoi_color(map, j, i);
+    num = ft_atoi_color(parse->map, j, i);
     if (num < 0 || num > 255)
         ft_error("Error\nInvalid color\n");
     ft_insert_color(row, parse, flag, num);
-    while (map[i] != ',')
+    while (parse->map[i] != ',')
         i++;
-    if (map[i] != ',')
+    if (parse->map[i] != ',')
         ft_error("Error\nno comma after color output\n");
     i++;
     if (++row != 3)
-        ft_check_color(map, i, row);
+        ft_check_color(i, row, &parse, j, flag);
     if (row == 3)
     {
-        while (map[i] == ' ' || map[i] == '\t')
+        while (parse->map[i] == ' ' || parse->map[i] == '\t')
             i++;
-        if (map[i] == '\n')
+        if (parse->map[i] == '\n')
             return ;
         else
             ft_error("Error\nInvalid map\n");
     }
+}
+
+void    ft_insert_texture_path(t_parse *parse, char *map, int flag)
+{
+    if (flag == NO)
+        parse->no = map;
+    else if (flag == SO)
+        parse->so = map;
+    else if (flag == WE)
+        parse->we = map;
+    else if (flag == EA)
+        parse->ea = map;
+    else
+        ft_error("Error\nInvalid texture path\n");
 }

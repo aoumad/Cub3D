@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:14 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/13 12:56:46 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/17 09:44:32 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void    ft_error(char *str)
 {
     // rememeber i need to call free here and pass struct to free it
     printf("%s", str);
+    // free all malloced data
     exit(1);
 }
 
@@ -52,11 +53,13 @@ int	ft_atoi_color(const char *str, int begin, int end)
 	return (number);
 }
 
-int    ft_half_done(int *tab)
+void    ft_half_done(int *tab, t_parse *parse)
 {
     if (tab[(unsigned int)'N'] == 0 || tab[(unsigned int)'S'] == 0 || tab[(unsigned int)'W'] == 0 || 
         tab[(unsigned int)'E'] == 0 || tab[(unsigned int)'F'] == 0 || tab[(unsigned int)'C'] == 0)
         ft_error("Error\nMissing pattern\n");
+    if (parse->no == NULL || parse->so == NULL || parse->we == NULL || parse->ea == NULL)
+        ft_error("Error\nMissing texture\n");
 }
 
 void    ft_isspace_2D(char **map, t_cor *s_cor)
