@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/17 16:23:00 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/18 23:57:12 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void    ft_read_file(char *file, t_parse *parse);
 void    ft_check_arg(char **arg);
 // void    ft_check_file(char *file, t_parse *parse);
 void    ft_check_map(t_parse *parse);
-void    ft_check_map2(int *tab, char *map, t_parse *parse);
+void    ft_check_map2(int *tab, char *map, t_parse *parse, int j);
 void    ft_duplicate_pattern(int *tab, char *map, int flag, t_parse *parse);
 void    ft_check_map_chars(char **map, t_parse *parse);
 void    ft_check_map_walls(char **map, t_parse *parse);
@@ -187,4 +187,5 @@ void    ft_isspace_2D(char **map, t_cor *s_cor);
 int     ft_standard_isspace(char c);
 int     ft_edges_checker(char **map, int i, int j);
 void    ft_error(char *str);
+size_t	ft_strlen_mine(const char *s);
 #endif

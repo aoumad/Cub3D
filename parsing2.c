@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:26:16 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/17 16:25:27 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/18 23:56:53 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,17 @@ void    ft_check_texture_path(char *map, int i)
     int len;
 
     j = 0;
+    printf("%c\n", map[i]);
+    printf("index is: %d\n", i);
     if (map[i] == '.' && map[i + 1] == '/')
     {
-        len = ft_strlen(map);
+        len = ft_strlen_mine(map);
+        printf("len of the string is: %d\n", len);
         if (map[len - 1] == 'm' && map[len - 2] == 'p' &&
             map[len - 3] == 'x' && map[len - 4] == '.')
             return ;
     }
+    printf("odaba\n");
     ft_error("Error\nInvalid texture path\n");
 }
 
@@ -92,6 +96,12 @@ void    ft_insert_texture_path(t_parse *parse, char *map, int flag)
         parse->we = map;
     else if (flag == EA)
         parse->ea = map;
-    else
-        ft_error("Error\nInvalid texture path\n");
+    // else
+    //     ft_error("Error\nInvalid texture path\n");
+    printf("%s\n", map);
 }
+
+// void    ft_read_texture_path(t_parse *parse, int flag)
+// {
+    
+// }

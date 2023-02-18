@@ -6,19 +6,33 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/17 16:19:33 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/18 23:52:40 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+void    ft_print_map(t_parse *parse);
 
 t_parse ft_parse(char **arg, t_parse *parse)
 {
     init_data(parse);
     ft_check_arg(arg);
     ft_read_file(arg[1], parse);
+    // ft_print_map(parse);
     ft_check_map(parse);
     return (*parse);
+}
+
+void    ft_print_map(t_parse *parse)
+{
+    int i = 0;
+    
+    while (parse->map[i])
+    {
+        printf("%s\n", parse->map[i]);
+        i++;
+    }
+    return ;
 }
 
 void    ft_read_file(char *file, t_parse *parse)
@@ -33,6 +47,7 @@ void    ft_read_file(char *file, t_parse *parse)
     if (fd == -1)
         ft_error("Error\nopen() failed\n");
     line = get_next_line(fd);
+    buf = ft_strdup("");
     while (line)
     {
         if (line[0] == '\n')
@@ -47,6 +62,7 @@ void    ft_read_file(char *file, t_parse *parse)
     }
     close(fd);
     parse->map = ft_split(buf, '\n');
+    free(buf);
 }
 
 void    ft_duplicate_pattern(int *tab, char *map, int flag, t_parse *parse)
@@ -69,6 +85,7 @@ void    ft_duplicate_pattern(int *tab, char *map, int flag, t_parse *parse)
             ft_error("Error\nInvalid pattern\n");
         ft_check_texture_path(map, i);
         ft_insert_texture_path(parse, map, flag);
+        // ft_read_texture_path(parse, flag);
     }
     else if (flag == F_FLAG || flag == C_FLAG)
     {
@@ -79,19 +96,19 @@ void    ft_duplicate_pattern(int *tab, char *map, int flag, t_parse *parse)
     }
 }
 
-void    ft_check_map2(int *tab, char *map, t_parse *parse)
+void    ft_check_map2(int *tab, char *map, t_parse *parse, int j)
 {
-    if (map[0] == 'N' && map[1] == 'O')
+    if (map[j] == 'N' && map[j + 1] == 'O')
         ft_duplicate_pattern(tab, map, NO, parse);
-    else if (map[0] == 'S' && map[1] == 'O')
+    else if (map[j] == 'S' && map[j + 1] == 'O')
         ft_duplicate_pattern(tab, map, SO, parse);
-    else if (map[0] == 'W' && map[1] == 'E')
+    else if (map[j] == 'W' && map[j + 1] == 'E')
         ft_duplicate_pattern(tab, map, WE, parse);
-    else if (map[0] == 'E' && map[1] == 'A')
+    else if (map[j] == 'E' && map[j + 1] == 'A')
         ft_duplicate_pattern(tab, map, EA, parse);
-    else if (map[0] == 'F')
+    else if (map[j] == 'F')
         ft_duplicate_pattern(tab, map, F_FLAG, parse);
-    else if (map[0] == 'C')
+    else if (map[j] == 'C')
         ft_duplicate_pattern(tab, map, C_FLAG, parse);
 }
 
@@ -103,24 +120,27 @@ void    ft_check_map(t_parse *parse)
 
     i = 0;
     j = 0;
-    while (parse->map[i][j])
+    if (parse->map == NULL)
+        ft_error("Error\nEmpty map\n");
+    // ft_print_map(parse);
+    while (parse->map[i])
     {
-        if (parse->map == NULL)
-            ft_error("Error\nEmpty map\n");
+        printf("%s\n", parse->map[i]);
         parse->s_cor->x = i;
         parse->s_cor->y = j;
         ft_isspace_2D(parse->map, parse->s_cor);
         i = parse->s_cor->x;
         j = parse->s_cor->y;
-        if (parse->map[i][0] == 'N' || parse->map[i][0] == 'S' || parse->map[i][0] == 'W' ||
-            parse->map[i][0] == 'C' || parse->map[i][0] == 'E' || parse->map[i][0] == 'F')
+        if (parse->map[i][j] == 'N' || parse->map[i][j] == 'S' || parse->map[i][j] == 'W' ||
+            parse->map[i][j] == 'C' || parse->map[i][j] == 'E' || parse->map[i][j] == 'F')
             {
-                ft_check_map2(tab, parse->map[i], parse);
+                ft_check_map2(tab, parse->map[i], parse, j);
                 i++;
             }
         if (tab[(unsigned int)'N'] == 1 && tab[(unsigned int)'S'] == 1 && tab[(unsigned int)'W'] == 1 && 
             tab[(unsigned int)'E'] == 1 && tab[(unsigned int)'F'] == 1 && tab[(unsigned int)'C'] == 1)
             break;
+        i++;
     }
     ft_half_done(tab, parse);
     ft_second_half_checker(parse, tab, i, j);

@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:14 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/17 16:02:33 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/18 23:56:40 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,18 @@ void    ft_error(char *str)
 
 int     ft_isspace(char *map, int index)
 {
+    // printf("index before %d\n", index);
     int i = index;
     while (map[index] == ' ' || map[index] == '\t' || map[index] == '\n' ||
         map[index] == '\v' || map[index] == '\f' || map[index] == '\r')
-        index++;
+        {
+            index++;
+            // printf("hahahaha\n");
+        }
     if (i == index)
         return (0);
-    return (i);
+    // printf("returned index %d\n", i);
+    return (index);
 }
 
 int	ft_atoi_color(const char *str, int begin, int end)
@@ -83,4 +88,14 @@ int     ft_standard_isspace(char c)
     if (c == ' ' || c == '\t')
         return (1);
     return (0);
+}
+
+size_t	ft_strlen_mine(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0' && s[i] != ' ' && s[i] != ' ' && s[i] != '\t')
+		i++;
+	return (i);
 }
