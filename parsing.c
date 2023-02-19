@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/18 23:52:40 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/19 01:23:02 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,16 @@ void    ft_duplicate_pattern(int *tab, char *map, int flag, t_parse *parse)
         i = ft_isspace(map, 2);
         if (i == 0)
             ft_error("Error\nInvalid pattern\n");
-        ft_check_texture_path(map, i);
-        ft_insert_texture_path(parse, map, flag);
+        ft_check_texture_path(parse, map, flag, i);
         // ft_read_texture_path(parse, flag);
     }
     else if (flag == F_FLAG || flag == C_FLAG)
     {
-        i = ft_isspace(map, 1);
-        if (i == 0)
+        // i should put this incrmeneting structure in an indepent function
+        i = ft_isspace_no_n(map, 0); // to increment the spaces before 'F' or 'C'
+        if (map[i] == 'F' || map[i] == 'C')
+            index.i = ft_isspace_no_n(map, ++i); // to increment the spaces after the 'F' or 'C'
+        if (index.i == 0)
             ft_error("Error\nInvalid pattern\n");
         ft_check_color(index, 0, map, flag, parse);
     }
@@ -133,13 +135,10 @@ void    ft_check_map(t_parse *parse)
         j = parse->s_cor->y;
         if (parse->map[i][j] == 'N' || parse->map[i][j] == 'S' || parse->map[i][j] == 'W' ||
             parse->map[i][j] == 'C' || parse->map[i][j] == 'E' || parse->map[i][j] == 'F')
-            {
                 ft_check_map2(tab, parse->map[i], parse, j);
-                i++;
-            }
         if (tab[(unsigned int)'N'] == 1 && tab[(unsigned int)'S'] == 1 && tab[(unsigned int)'W'] == 1 && 
             tab[(unsigned int)'E'] == 1 && tab[(unsigned int)'F'] == 1 && tab[(unsigned int)'C'] == 1)
-            break;
+                break;
         i++;
     }
     ft_half_done(tab, parse);

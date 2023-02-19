@@ -6,30 +6,29 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:26:16 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/18 23:56:53 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/19 01:21:54 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
     // ./../texture/NO.xpm (generate parsing that handles that)
-void    ft_check_texture_path(char *map, int i)
+void    ft_check_texture_path(t_parse *parse, char *map, int flag, int i)
 {
     int j;
     int len;
 
     j = 0;
-    printf("%c\n", map[i]);
-    printf("index is: %d\n", i);
     if (map[i] == '.' && map[i + 1] == '/')
     {
-        len = ft_strlen_mine(map);
-        printf("len of the string is: %d\n", len);
+        len = ft_strlen_mine(map, i);
         if (map[len - 1] == 'm' && map[len - 2] == 'p' &&
             map[len - 3] == 'x' && map[len - 4] == '.')
-            return ;
+            {
+                ft_insert_texture_path(parse, map, flag, i, len);
+                return ;
+            }
     }
-    printf("odaba\n");
     ft_error("Error\nInvalid texture path\n");
 }
 
@@ -68,37 +67,37 @@ void    ft_check_color(t_index index, int row, char *map, int flag, t_parse *par
     if (num < 0 || num > 255)
         ft_error("Error\nInvalid color\n");
     ft_insert_color(row, parse, flag, num);
-    while (map[index.i] != ',')
-        index.i++;
-    if (map[index.i] != ',')
-        ft_error("Error\nno comma after color output\n");
-    index.i++;
+    if (row != 2)
+    {
+        while (map[index.i] != ',')
+            index.i++;
+        if (map[index.i++] != ',')
+            ft_error("Error\nno comma after color output\n");
+    }
+    index.i = ft_isspace_no_n(map, index.i);
     if (++row != 3)
         ft_check_color(index, row, map, flag, parse);
-    if (row == 3)
+    else
     {
-        while (map[index.i] == ' ' || map[index.i] == '\t')
-            index.i++;
-        if (map[index.i] == '\n')
+        if (map[index.i] == '\0')
             return ;
         else
             ft_error("Error\nInvalid map\n");
     }
 }
 
-void    ft_insert_texture_path(t_parse *parse, char *map, int flag)
+void    ft_insert_texture_path(t_parse *parse, char *map, int flag, int i, int len)
 {
     if (flag == NO)
-        parse->no = map;
+        parse->no = ft_substr(map, i, len);
     else if (flag == SO)
-        parse->so = map;
+        parse->so = ft_substr(map, i, len);
     else if (flag == WE)
-        parse->we = map;
+        parse->we = ft_substr(map, i, len);
     else if (flag == EA)
-        parse->ea = map;
-    // else
-    //     ft_error("Error\nInvalid texture path\n");
-    printf("%s\n", map);
+        parse->ea = ft_substr(map, i, len);
+    else
+        ft_error("Error\nInvalid texture path\n");
 }
 
 // void    ft_read_texture_path(t_parse *parse, int flag)

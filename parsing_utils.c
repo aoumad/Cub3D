@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:14 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/18 23:56:40 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/19 01:20:46 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,27 @@ int     ft_isspace(char *map, int index)
     return (index);
 }
 
+int     ft_isspace_no_n(char *map, int index)
+{
+    // printf("index before %d\n", index);
+    int i = index;
+    while (map[index] == ' ' || map[index] == '\t')
+        {
+            index++;
+            // printf("hahahaha\n");
+        }
+    if (i == index)
+        return (0);
+    // printf("returned index %d\n", i);
+    return (index);
+}
+
 int	ft_atoi_color(const char *str, int begin, int end)
 {
 	int number;
 
 	number = 0;
-	while(begin <= end)
+	while(begin < end)
 	{
 		if (str[begin] >= '0' && str[begin] <= '9')
 			number = number * 10 + (str[begin++] - 48);
@@ -90,12 +105,12 @@ int     ft_standard_isspace(char c)
     return (0);
 }
 
-size_t	ft_strlen_mine(const char *s)
+size_t	ft_strlen_mine(const char *s, int j)
 {
 	size_t	i;
 
-	i = 0;
-	while (s[i] != '\0' && s[i] != ' ' && s[i] != ' ' && s[i] != '\t')
+	i = (size_t)j;
+	while (s[i] != '\0' && s[i] != ' ' && s[i] != '\t')
 		i++;
 	return (i);
 }
