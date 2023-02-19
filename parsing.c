@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/19 02:37:03 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/19 13:38:46 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,23 +196,40 @@ void    ft_check_map_closed(t_parse *parse)
     k = 0;
     l = 0;
     flag = 0;
-    visited = (int **)malloc(sizeof(int *) * parse->s_cor->x);
-    while (i < parse->s_cor->x)
+    parse->map_height = ++parse->s_cor->x; // pass the `C` line
+    parse->map_width = parse->s_cor->y;
+    while (parse->map[parse->map_height])
     {
-        visited[i] = (int *)malloc(sizeof(int) * parse->s_cor->y);
+        parse->s_cor->y = 0;
+        while (parse->map[parse->map_height][parse->s_cor->y++])
+        {
+            if ((parse->map_width < parse->s_cor->y))
+                parse->map_width = parse->s_cor->y;
+        }
+        parse->map_height++;
+    }
+    // printf("hnaaaaaaaa\n");
+    // printf("map height: %d\n", parse->map_height);
+    // printf("map weight: %d\n", parse->map_width);
+    // printf("s_cor x: %d\n", parse->s_cor->x);
+    visited = (int **)malloc(sizeof(int *) * (parse->map_height - parse->s_cor->x)); // deja mzyod 3ndi wa7d donc dik `+1` blach mnha
+    while (i < (parse->map_height - parse->s_cor->x))
+    {
+        visited[i] = (int *)malloc(sizeof(int) * parse->map_width);
         i++;
     }
     i = 0;
-    while (i < parse->s_cor->x)
+    while (i < (parse->map_height - parse->s_cor->x))
     {
         j = 0;
-        while (j < parse->s_cor->y)
+        while (j < parse->map_width)
         {
             visited[i][j] = 0;
             j++;
         }
         i++;
     }
+    printf("daaaaaaaaayza\n");
     i = 0;
     while (i < parse->s_cor->x)
     {
