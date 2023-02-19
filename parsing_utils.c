@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:14 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/19 01:26:07 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/19 15:42:36 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ void    ft_isspace_2D(char **map, t_cor *s_cor)
 
 int     ft_standard_isspace(char c)
 {
-    if (c == ' ' || c == '\t')
+    // printf("character: %c\n", c);
+    if (c == ' ' || c == '\t' || c == '\n' || c == '\0')
         return (1);
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/19 13:38:46 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/19 15:43:02 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,13 +229,20 @@ void    ft_check_map_closed(t_parse *parse)
         }
         i++;
     }
-    printf("daaaaaaaaayza\n");
-    i = 0;
-    while (i < parse->s_cor->x)
+    i = parse->s_cor->x;
+    // printf("index i: %d\n", i);
+    // printf("map in that index:%s\n", parse->map[i]);
+    while (i < (parse->map_height - parse->s_cor->x))
     {
+        printf("map string:%s\n", parse->map[i]);
         j = 0;
-        while (j < parse->s_cor->y)
+        while (j < parse->map_width)
         {
+            // if (i == 15 && j == 15)
+            // {
+            //     printf("daaaaaaaaayza j: %d\n", j);
+            //     printf("character: %c\n", parse->map[i][j]);
+            // }
             if (parse->map[i][j] == '1' && (ft_edges_checker(parse->map, i, j) == 1))
             {
                 visited[i][j] = 1;
@@ -244,7 +251,13 @@ void    ft_check_map_closed(t_parse *parse)
                 ft_dfs(parse, visited, &k, &l, &flag);
             }
             else if (parse->map[i][j] == '0' && (ft_edges_checker(parse->map, i, j) == 1))
+            {
                 ft_error("Error\nMap is not closed\n");
+                printf("found it\n");
+            }
+            
+            if (parse->map[i][j] == '\n' || parse->map[i][j] == '\0')
+                break;
             j++;
         }
         i++;
@@ -255,9 +268,11 @@ void    ft_check_map_closed(t_parse *parse)
 
 int ft_edges_checker(char **map, int i, int j)
 {
-    if (ft_standard_isspace(map[i][j + 1] == 1) || ft_standard_isspace(map[i][j - 1] == 1) ||
-        ft_standard_isspace(map[i + 1][j] == 1) || ft_standard_isspace(map[i - 1][j] == 1))
-        return (1);
+    // printf("map[i][j]: %c ---- i:%d ----j:%d\n", map[i][j], i, j);
+    // printf("hahahahah\n");
+    if ((ft_standard_isspace(map[i][j + 1]) == 1) || (ft_standard_isspace(map[i][j - 1]) == 1) ||
+        (ft_standard_isspace(map[i + 1][j]) == 1) || (ft_standard_isspace(map[i - 1][j]) == 1))
+            return (1);
     return (0);
 }
 
