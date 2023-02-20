@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/20 16:53:41 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/20 22:09:13 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,13 @@ void    ft_check_map(t_parse *parse)
     while (parse->map[i])
     {
         printf("%s\n", parse->map[i]);
+        printf("before s_cor x: %d\n", parse->s_cor->x);
+        printf("before s_cor y: %d\n", parse->s_cor->y);
         parse->s_cor->x = i;
         parse->s_cor->y = j;
         ft_isspace_2D(parse->map, parse->s_cor);
+        printf("after s_cor x: %d\n", parse->s_cor->x);
+        printf("after s_cor y: %d\n", parse->s_cor->y);
         i = parse->s_cor->x;
         j = parse->s_cor->y;
         if (parse->map[i][j] == 'N' || parse->map[i][j] == 'S' || parse->map[i][j] == 'W' ||
@@ -135,10 +139,10 @@ void    ft_check_map(t_parse *parse)
                 break;
         i++;
     }
+    printf("s_cor x: %d\n", parse->s_cor->x);
     ft_half_done(tab, parse);
     ft_second_half_checker(parse, tab, i, j);
 }
-
 
 void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j)
 {
@@ -436,6 +440,7 @@ void    ft_insert_simulation(t_parse *parse)
     }
     i -= parse->s_cor->x; // 39 - 13 = 26 | i have 25 lines in the simulation
 
+    printf("s_cor x: %d\n", parse->s_cor->x);
     // allocate the parse->sim now
     parse->sim = (char **)malloc(sizeof(char *) * i);
     while (k < i)

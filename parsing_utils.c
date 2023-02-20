@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:14 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/20 16:42:06 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/20 22:15:44 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,21 +82,54 @@ void    ft_half_done(int *tab, t_parse *parse)
         ft_error("Error\nMissing texture\n");
 }
 
-void    ft_isspace_2D(char **map, t_cor *s_cor)
-{
-    while (map[s_cor->x][s_cor->y] == ' ' || map[s_cor->x][s_cor->y] == '\t' || map[s_cor->x][s_cor->y] == '\n' ||
-        map[s_cor->x][s_cor->y] == '\v' || map[s_cor->x][s_cor->y] == '\f' || map[s_cor->x][s_cor->y] == '\r')
-    {
-        if (map[s_cor->x][s_cor->y] == '\0')
-        {
-            s_cor->x++;
-            s_cor->y = 0;
-        }
-        else
-            s_cor->y++;
-    }
-    return ;
-}
+// void    ft_isspace_2D(char **map, t_cor *s_cor)
+// {
+//     while (map[s_cor->y][s_cor->x] == ' ' || map[s_cor->y][s_cor->x] == '\t' || map[s_cor->y][s_cor->x] == '\n' ||
+//         map[s_cor->y][s_cor->x] == '\v' || map[s_cor->y][s_cor->x] == '\f' || map[s_cor->y][s_cor->x] == '\r')
+//     {
+//         if (map[s_cor->y][s_cor->x] == '\n')
+//         {
+//             s_cor->y++;
+//             s_cor->x = 0;
+//         }
+//         else
+//             s_cor->x++;
+//     }
+//     return ;
+// }
+
+// void   ft_isspace_2D(char **map, t_cor *s_cor)
+// {
+//     while (map[s_cor->x][s_cor->y] == ' ' || map[s_cor->x][s_cor->y] == '\t' || map[s_cor->x][s_cor->y] == '\0' ||
+//             map[s_cor->x] == '\0')
+//     {
+//         if (map[s_cor->x][s_cor->y] == '\0' || map[s_cor->x] == '\0')
+//         {
+//             printf("the string happened here, s_cor x:%d\n", s_cor->x);
+//             s_cor->x++;
+//             s_cor->y = 0;
+//         }
+//         else
+//             s_cor->y++;
+//     }
+//     return ;
+// }
+
+// void    ft_isspace_2D(char **map, t_cor *s_cor)
+// {
+//     while (map[s_cor->y][s_cor->x] == ' ' || map[s_cor->y][s_cor->x] == '\t' || map[s_cor->y][s_cor->x] == '\n' ||
+//         map[s_cor->y][s_cor->x] == '\v' || map[s_cor->y][s_cor->x] == '\f' || map[s_cor->y][s_cor->x] == '\r')
+//     {
+//         if (map[s_cor->y][s_cor->x] == '\n')
+//         {
+//             s_cor->y++;
+//             s_cor->x = 0;
+//         }
+//         else
+//             s_cor->x++;
+//     }
+//     return ;
+// }
 
 int     ft_standard_isspace(char c)
 {
