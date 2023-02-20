@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/19 01:04:25 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/20 15:51:19 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,9 @@ typedef struct s_parse
     int     f[3];
     int     c[3];
     char    **map;
+    char    **sim;
+    int     sim_height;
+    int     sim_width;
     int     map_width;
     int     map_height;
     int     player_x;
@@ -176,8 +179,9 @@ void    ft_insert_texture_path(t_parse *parse, char *map, int flag, int i, int l
 void    ft_check_texture_path(t_parse *parse, char *map, int flag, int i);
 void    ft_check_color(t_index index, int row, char *map, int flag, t_parse *parse);
 void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j);
-void    ft_dfs(t_parse *parse, int **visited, int *i, int *j, int *flag);
+void    ft_dfs(t_parse *parse, int **visited, int i, int j, int *flag);
 void    ft_insert_color(int row, t_parse *parse, int flag, int num);
+void    ft_insert_simulation(t_parse *parse);
 
 // utils functions //
 int     ft_isspace(char *map, int index);

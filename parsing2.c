@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:26:16 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/19 01:21:54 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/20 16:15:40 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,3 @@ void    ft_insert_texture_path(t_parse *parse, char *map, int flag, int i, int l
     else
         ft_error("Error\nInvalid texture path\n");
 }
-
-// void    ft_read_texture_path(t_parse *parse, int flag)
-// {
-    
-// }

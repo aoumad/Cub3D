@@ -6,7 +6,7 @@ SRC		=	main.c parsing.c parsing_utils.c  parsing2.c init.c GNL/get_next_line.c G
 
 CC 		= gcc
 
-FLAGS	= -Wall -Wextra -Werror -Ofast -g
+FLAGS	= -Wall -Wextra -Werror -Ofast -g -fsanitize=address
 
 # MLXFLAGS = -framework OpenGL -framework Appkit
 
