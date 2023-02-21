@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:30 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/20 16:09:19 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/20 23:29:41 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ void    init_data(t_parse *parse)
     parse->s_cor = malloc(sizeof(t_cor));
     parse->s_cor->x = 0;
     parse->s_cor->y = 0;
+    parse->s_index = malloc(sizeof(t_index));
+    parse->s_index->i = 0;
+    parse->s_index->j = 0;
 }
 
 /*

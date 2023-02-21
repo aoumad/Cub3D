@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:14 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/20 22:15:44 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/20 23:24:43 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int     ft_isspace(char *map, int index)
 int     ft_isspace_no_n(char *map, int index)
 {
     // printf("index before %d\n", index);
+    // printf("string of the map:%s\n", map);
     int i = index;
     while (map[index] == ' ' || map[index] == '\t')
         {
@@ -82,21 +83,21 @@ void    ft_half_done(int *tab, t_parse *parse)
         ft_error("Error\nMissing texture\n");
 }
 
-// void    ft_isspace_2D(char **map, t_cor *s_cor)
-// {
-//     while (map[s_cor->y][s_cor->x] == ' ' || map[s_cor->y][s_cor->x] == '\t' || map[s_cor->y][s_cor->x] == '\n' ||
-//         map[s_cor->y][s_cor->x] == '\v' || map[s_cor->y][s_cor->x] == '\f' || map[s_cor->y][s_cor->x] == '\r')
-//     {
-//         if (map[s_cor->y][s_cor->x] == '\n')
-//         {
-//             s_cor->y++;
-//             s_cor->x = 0;
-//         }
-//         else
-//             s_cor->x++;
-//     }
-//     return ;
-// }
+void    ft_isspace_2D(char **map, t_cor *s_cor)
+{
+    while (map[s_cor->y][s_cor->x] == ' ' || map[s_cor->y][s_cor->x] == '\t' || map[s_cor->y][s_cor->x] == '\n' ||
+        map[s_cor->y][s_cor->x] == '\v' || map[s_cor->y][s_cor->x] == '\f' || map[s_cor->y][s_cor->x] == '\r')
+    {
+        if (map[s_cor->y][s_cor->x] == '\n')
+        {
+            s_cor->y++;
+            s_cor->x = 0;
+        }
+        else
+            s_cor->x++;
+    }
+    return ;
+}
 
 // void   ft_isspace_2D(char **map, t_cor *s_cor)
 // {

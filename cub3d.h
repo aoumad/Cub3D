@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/20 21:24:22 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/20 23:29:34 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ typedef struct s_parse
     t_mlx   *s_mlx;
     t_fd    *s_fd;
     t_cor   *s_cor;
+    t_index *s_index;
 }               t_parse;
 
 
@@ -166,7 +167,7 @@ void    ft_check_arg(char **arg);
 // void    ft_check_file(char *file, t_parse *parse);
 void    ft_check_map(t_parse *parse);
 void    ft_check_map2(int *tab, char *map, t_parse *parse, int j);
-void    ft_duplicate_pattern(int *tab, char *map, int flag, t_parse *parse);
+void    ft_duplicate_pattern(int *tab, char *map, int flag, t_parse *parse, int j);
 void    ft_check_map_chars(char **map, t_parse *parse);
 void    ft_check_map_walls(char **map, t_parse *parse);
 void    ft_check_map_player(char **map, t_parse *parse);

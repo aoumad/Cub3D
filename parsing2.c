@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:26:16 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/20 16:15:40 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/21 01:47:43 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ void    ft_check_texture_path(t_parse *parse, char *map, int flag, int i)
 
 void    ft_insert_color(int row, t_parse *parse, int flag, int num)
 {
-    if (flag == 0)
+    if (flag == F_FLAG)
     {
+        printf("daaaz 2\n");
         if (row == 0)
             parse->f[0] = num;
         else if (row == 1)
@@ -43,8 +44,9 @@ void    ft_insert_color(int row, t_parse *parse, int flag, int num)
         else if (row == 2)
             parse->f[2] = num;
     }
-    else if (flag == 1)
+    else if (flag == C_FLAG)
     {
+        printf("daaaz 3\n");
         if (row == 0)
             parse->c[0] = num;
         else if (row == 1)
@@ -59,7 +61,8 @@ void    ft_insert_color(int row, t_parse *parse, int flag, int num)
 void    ft_check_color(t_index index, int row, char *map, int flag, t_parse *parse)
 {
     int num;
-    
+    printf("INDEX I:%d\n", index.i);
+    printf("INDEX J:%d\n", index.j);
     index.j = index.i;
     while (ft_isdigit(map[index.i]))
         index.i++;
@@ -79,6 +82,8 @@ void    ft_check_color(t_index index, int row, char *map, int flag, t_parse *par
         ft_check_color(index, row, map, flag, parse);
     else
     {
+        printf("row: %d\n", row);
+        printf("index i: %d\n", index.i);
         if (map[index.i] == '\0')
             return ;
         else
