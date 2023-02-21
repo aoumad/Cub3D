@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/21 01:46:54 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/21 13:42:40 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void    ft_duplicate_pattern(int *tab, char *map, int flag, t_parse *parse, int 
     t_index index;
     int i;
     
-    index.i = 1;
+    index.i = 0;
     index.j = 0;
     i = 0;
     if (tab[(unsigned int)map[0]] == 0)
@@ -82,18 +82,19 @@ void    ft_duplicate_pattern(int *tab, char *map, int flag, t_parse *parse, int 
     }
     else if (flag == F_FLAG || flag == C_FLAG)
     {
+        printf("index i: %d\n", index.i);
         // i should put this incrmeneting structure in an indepent function
-        printf("first isspace i:%d\n", index.i);
         // ga3 makhdama hadi !!!!!!!!!!!!!!!!
-        index.i = ft_isspace_no_n(map, j); // to increment the spaces before 'F' or 'C'
+        index.i = ft_isspace_no_n(map, index.i); // to increment the spaces before 'F' or 'C'
         if (map[i] == 'F' || map[i] == 'C')
-        printf("after first isspace i:%d\n", index.i);
         {
-            printf("j index: %d\n", j);
-            index.i = ft_isspace_no_n(map, j); // to increment the spaces after the 'F' or 'C'
+            index.i = ft_isspace_no_n(map, ++index.i); // to increment the spaces after the 'F' or 'C'
+            printf("i index---->: %d\n", index.i);
+            printf("map[index.i]---->: %c\n", map[index.i]);
         }
+        // printf("after first isspace i:%d\n", index.i);
         // printf("------> index i: %d\n", index.i);
-        printf("after second isspace i:%d\n", index.i);
+        // printf("after second isspace i:%d\n", index.i);
         if (index.i == 0)
             ft_error("Error\nInvalid pattern\n");
         index.j = j;
@@ -193,13 +194,7 @@ void    ft_check_map(t_parse *parse)
         // j = parse->s_cor->y;
         if (parse->map[i][j] == 'N' || parse->map[i][j] == 'S' || parse->map[i][j] == 'W' ||
             parse->map[i][j] == 'C' || parse->map[i][j] == 'E' || parse->map[i][j] == 'F')
-            {
-                if (parse->map[i][j] == 'F')
-                {
-                    printf("-----------------dddF-----------------\n");
-                }
                 ft_check_map2(tab, parse->map[i], parse, j);
-            }
         if (tab[(unsigned int)'N'] == 1 && tab[(unsigned int)'S'] == 1 && tab[(unsigned int)'W'] == 1 && 
             tab[(unsigned int)'E'] == 1 && tab[(unsigned int)'F'] == 1 && tab[(unsigned int)'C'] == 1)
             {

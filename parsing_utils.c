@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:14 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/20 23:24:43 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/21 14:42:21 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,11 @@ int     ft_isspace_no_n(char *map, int index)
 {
     // printf("index before %d\n", index);
     // printf("string of the map:%s\n", map);
-    int i = index;
     while (map[index] == ' ' || map[index] == '\t')
         {
             index++;
             // printf("hahahaha\n");
         }
-    if (i == index)
-        return (0);
     // printf("returned index %d\n", i);
     return (index);
 }

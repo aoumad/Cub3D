@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:26:16 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/21 01:47:43 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/21 14:42:45 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,19 @@ void    ft_insert_color(int row, t_parse *parse, int flag, int num)
 void    ft_check_color(t_index index, int row, char *map, int flag, t_parse *parse)
 {
     int num;
-    printf("INDEX I:%d\n", index.i);
-    printf("INDEX J:%d\n", index.j);
-    index.j = index.i;
+    index.j = index.i; // to save the start of the number and give it index to j
     while (ft_isdigit(map[index.i]))
         index.i++;
+
+    printf("INDEX I:%d\n", index.i);
+    printf("INDEX J:%d\n", index.j);
+    
     num = ft_atoi_color(map, index.j, index.i);
     if (num < 0 || num > 255)
         ft_error("Error\nInvalid color\n");
+        
+    printf("the num:%d\n", num);
+    
     ft_insert_color(row, parse, flag, num);
     if (row != 2)
     {
@@ -82,8 +87,6 @@ void    ft_check_color(t_index index, int row, char *map, int flag, t_parse *par
         ft_check_color(index, row, map, flag, parse);
     else
     {
-        printf("row: %d\n", row);
-        printf("index i: %d\n", index.i);
         if (map[index.i] == '\0')
             return ;
         else
