@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/20 23:29:34 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/21 16:49:16 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,4 +194,5 @@ int     ft_edges_checker(char **map, int i, int j);
 void    ft_error(char *str);
 size_t	ft_strlen_mine(const char *s, int j);
 int     ft_isspace_no_n(char *map, int index);
+void    ft_mark_texture_path(int *tab, char *map, int flag, int j);
 #endif

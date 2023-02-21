@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:26:16 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/21 14:42:45 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/21 16:33:09 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void    ft_insert_color(int row, t_parse *parse, int flag, int num)
 {
     if (flag == F_FLAG)
     {
-        printf("daaaz 2\n");
         if (row == 0)
             parse->f[0] = num;
         else if (row == 1)
@@ -46,7 +45,6 @@ void    ft_insert_color(int row, t_parse *parse, int flag, int num)
     }
     else if (flag == C_FLAG)
     {
-        printf("daaaz 3\n");
         if (row == 0)
             parse->c[0] = num;
         else if (row == 1)
@@ -65,15 +63,11 @@ void    ft_check_color(t_index index, int row, char *map, int flag, t_parse *par
     while (ft_isdigit(map[index.i]))
         index.i++;
 
-    printf("INDEX I:%d\n", index.i);
-    printf("INDEX J:%d\n", index.j);
-    
+    // printf("INDEX I:%d\n", index.i);
+    // printf("INDEX J:%d\n", index.j);
     num = ft_atoi_color(map, index.j, index.i);
     if (num < 0 || num > 255)
         ft_error("Error\nInvalid color\n");
-        
-    printf("the num:%d\n", num);
-    
     ft_insert_color(row, parse, flag, num);
     if (row != 2)
     {
@@ -99,7 +93,12 @@ void    ft_insert_texture_path(t_parse *parse, char *map, int flag, int i, int l
     if (flag == NO)
         parse->no = ft_substr(map, i, len);
     else if (flag == SO)
+    {
+        // printf("SO string is here:%s\n", map);
+        // printf("index of start:%d\n", i);
+        // printf("index of end:%d\n", len);
         parse->so = ft_substr(map, i, len);
+    }
     else if (flag == WE)
         parse->we = ft_substr(map, i, len);
     else if (flag == EA)

@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:14 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/21 14:42:21 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/21 16:50:51 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,17 @@ void    ft_half_done(int *tab, t_parse *parse)
 {
     if (tab[(unsigned int)'N'] == 0 || tab[(unsigned int)'S'] == 0 || tab[(unsigned int)'W'] == 0 || 
         tab[(unsigned int)'E'] == 0 || tab[(unsigned int)'F'] == 0 || tab[(unsigned int)'C'] == 0)
-        ft_error("Error\nMissing pattern\n");
+        {
+            printf("--------------------___--------\n");
+            printf("tab[(unsigned int)'N'] = %d\n", tab[(unsigned int)'N']);
+            printf("tab[(unsigned int)'S'] = %d\n", tab[(unsigned int)'S']);
+            printf("tab[(unsigned int)'W'] = %d\n", tab[(unsigned int)'W']);
+            printf("tab[(unsigned int)'E'] = %d\n", tab[(unsigned int)'E']);
+            printf("tab[(unsigned int)'F'] = %d\n", tab[(unsigned int)'F']);
+            printf("tab[(unsigned int)'C'] = %d\n", tab[(unsigned int)'C']);
+            printf("--------------------___--------\n");
+            ft_error("Error\nMissing pattern\n");
+        }
     if (parse->no == NULL || parse->so == NULL || parse->we == NULL || parse->ea == NULL)
         ft_error("Error\nMissing texture\n");
 }
@@ -145,4 +155,42 @@ size_t	ft_strlen_mine(const char *s, int j)
 	while (s[i] != '\0' && s[i] != ' ' && s[i] != '\t')
 		i++;
 	return (i);
+}
+
+void    ft_mark_texture_path(int *tab, char *map, int flag, int j)
+{
+    if (flag == WE || flag == SO || flag == EA || flag == NO)
+    {
+        if (j == 0)
+        {
+            if (tab[(unsigned int)map[j]] == 0)
+                tab[(unsigned int)map[j]] = 1;
+            else
+                ft_error("Error\nDuplicate texture\n");
+        }
+        else if (j >= 2)
+        {
+            if (tab[(unsigned int)map[j - 2]] == 0) // index of j always holds the index after the "WE|SO...etc"
+                tab[(unsigned int)map[j - 2]] = 1;
+            else
+                ft_error("Error\nDuplicate texture\n");
+        }
+    }
+    if (flag == F_FLAG || flag == C_FLAG)
+    {
+        if (j == 0)
+        {
+            if (tab[(unsigned int)map[j]] == 0)
+                tab[(unsigned int)map[j]] = 1;
+            else
+                ft_error("Error\nDuplicate texture\n");
+        }
+        else if (j >= 1)
+        {
+            if (tab[(unsigned int)map[j - 1]] == 0)
+                tab[(unsigned int)map[j - 1]] = 1;
+            else
+                ft_error("Error\nDuplicate texture\n");
+        }
+    }
 }
