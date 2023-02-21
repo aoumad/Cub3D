@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/21 16:53:32 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/21 19:04:58 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,7 @@ void    ft_check_map2(int *tab, char *map, t_parse *parse, int j)
     else if (map[j] == 'S' && map[j + 1] == 'O')
         ft_duplicate_pattern(tab, map, SO, parse, j + 2);
     else if (map[j] == 'W' && map[j + 1] == 'E')
-    {
-        printf("____duplicate pattern for WE got in\n");
         ft_duplicate_pattern(tab, map, WE, parse, j + 2);
-    }
     else if (map[j] == 'E' && map[j + 1] == 'A')
         ft_duplicate_pattern(tab, map, EA, parse, j + 2);
     else if (map[j] == 'F')
@@ -202,20 +199,23 @@ void    ft_check_map(t_parse *parse)
         i++;
     }
     parse->s_cor->x = i;
-    printf("before s_cor->i = %d\n", parse->s_cor->x);
+    // printf("before s_cor->i = %d\n", parse->s_cor->x);
     // printf("befores_cor->y = %d\n", parse->s_cor->y);
     ft_half_done(tab, parse);
-    ft_second_half_checker(parse, tab, i, j);
+    ft_second_half_checker(parse, tab, ++i, j);
 }
 
 void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j)
 {
-    ft_check_map_closed(parse);
+    // printf("DAAAAAAAAAAYZ\n");
+    // printf("i:%d\tj:%d\n", i, j);
+    // printf("map string in i index:%s\n", parse->map[i]);
     parse->s_cor->x = i;
     parse->s_cor->y = j;
-    // ft_isspace_2D(parse->map, parse->s_cor);
-    i = parse->s_cor->x;
-    j = parse->s_cor->y;
+    ft_check_map_closed(parse);
+    // // ft_isspace_2D(parse->map, parse->s_cor);
+    // i = parse->s_cor->x;
+    // j = parse->s_cor->y;
     while (parse->map[i][j])
     {
         if (parse->map[i][j] == '0' || parse->map[i][j] == '1' || parse->map[i][j] == ' ' || parse->map[i][j] == '\t')
@@ -385,13 +385,18 @@ void    ft_check_map_closed(t_parse *parse)
     k = 0;
     l = 0;
     flag = 0;
+    
     // parse->map_height = ++parse->s_cor->x; // pass the 'C' line ==> i am in the map simulation now
     // parse->map_width = parse->s_cor->y;
     ft_insert_simulation(parse);
     visited = (int **)malloc(sizeof(int *) * (parse->sim_height)); // deja mzyod 3ndi wa7d donc dik `+1` blach mnha
+    if (visited == NULL)
+        ft_error("Error\nMalloc failed\n");
     while (i < (parse->sim_height))
     {
         visited[i] = (int *)malloc(sizeof(int) * parse->sim_width);
+        if (visited[i] == NULL)
+            ft_error("Error\nMalloc failed\n");
         i++;
     }
     i = 0;
@@ -403,7 +408,23 @@ void    ft_check_map_closed(t_parse *parse)
             visited[i][j] = 0;
             j++;
         }
+        i++;
     }
+    // printf("KHRJAAAAAAAAAAAAAAAAAAAAAAAT\n");
+    // // print visited map
+    // i = 0;
+    // while (i < parse->sim_height)
+    // {
+    //     j = 0;
+    //     while (j < parse->sim_width)
+    //     {
+    //         printf("%d", visited[i][j]);
+    //         j++;
+    //     }
+    //     printf("\n");
+    //     i++;
+    // }
+    // printf("KHRJAAAAAAAAAAAAAAAAAAAAAAAT\n");
     i = 0;
     while (i < parse->sim_height)
     {
@@ -488,9 +509,10 @@ void    ft_insert_simulation(t_parse *parse)
     int j;
     int k;
     int l;
+    int flag = 0;
 
     k = 0;
-    i = ++parse->s_cor->x;
+    i = parse->s_cor->x;
     j = 0;
     while (parse->map[i])
     {
@@ -502,9 +524,10 @@ void    ft_insert_simulation(t_parse *parse)
         }
         i++;
     }
-    i -= parse->s_cor->x; // 39 - 13 = 26 | i have 25 lines in the simulation
-
-    printf("s_cor x: %d\n", parse->s_cor->x);
+    printf("index i: %d\n", i);
+    printf("parse->s_cor->x:%d\n", parse->s_cor->x);
+    i -= parse->s_cor->x; // 33 - 6 = 26 | i have 27 lines in the simulation
+    printf("index i after the minus operation: %d\n", i);
     // allocate the parse->sim now
     parse->sim = (char **)malloc(sizeof(char *) * i);
     while (k < i)
@@ -517,15 +540,38 @@ void    ft_insert_simulation(t_parse *parse)
     while (k < i)
     {
         l = 0;
-        while(parse->map[parse->s_cor->x][l] || l < j)
+        flag = 0;
+        while (l < j)
         {
-            if (parse->map[parse->s_cor->x][l] != '\0')
-                parse->sim[k][l] = parse->map[parse->s_cor->x][l];
-            else
+            // if (parse->map[parse->s_cor->x][l] != '\0')
+            //     parse->sim[k][l] = parse->map[parse->s_cor->x][l];
+            // else
+            //     parse->sim[k][l] = ' ';
+            if (flag == 0)
+                if (parse->map[parse->s_cor->x][l] == '\0')
+                    flag = 1;
+            if (flag == 1)
                 parse->sim[k][l] = ' ';
+            else
+                parse->sim[k][l] = parse->map[parse->s_cor->x][l];
             l++;
         }
+        k++;
+        parse->s_cor->x++;
     }
+    // // print the simulation
+    // k = 0;
+    // while (k < i)
+    // {
+    //     l = 0;
+    //     while (l < j)
+    //     {
+    //         printf("%c", parse->sim[k][l]);
+    //         l++;
+    //     }
+    //     printf("\n");
+    //     k++;
+    // }
     parse->sim_height = i;
     parse->sim_width = j;
 }
