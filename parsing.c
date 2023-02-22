@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/21 19:04:58 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/22 12:57:05 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -431,18 +431,18 @@ void    ft_check_map_closed(t_parse *parse)
         j = 0;
         while (j < parse->sim_width)
         {
-            if (parse->sim[i][j] == '1' && (ft_edges_checker(parse->sim, i, j) == 1))
-            {
-                visited[i][j] = 1;
-                k = i;
-                l = j;
-                ft_dfs(parse, visited, k, l, &flag);
-            }
-            else if (parse->sim[i][j] == '0' &&(ft_edges_checker(parse->sim, i, j) == 1))
-                ft_error("Error\nMap is not closed\n");
-
+            // if (parse->sim[i][j] == '1')
+            visited[i][j] = 1;
+            k = i;
+            l = j;
+            ft_dfs(parse, visited, k, l, &flag);
+            
             if (parse->sim[i][j] == '\n' || parse->sim[i][j] == '\0')
                 break;
+            if (parse->sim[i][j] == '0' &&(ft_edges_checker(parse, i, j) == 1))
+                ft_error("Error\nMap is not closed\n");
+            // else
+                // need to see if the a texture or another character got in the simulation
             j++;
         }
         i++;
@@ -462,6 +462,21 @@ void    ft_check_map_closed(t_parse *parse)
         i++;
     }
     i = 0;
+    // printf("KHRJAAAAAAAAAAAAAAAAAAAAAAAT\n");
+    // // print visited map
+    // i = 0;
+    // while (i < parse->sim_height)
+    // {
+    //     j = 0;
+    //     while (j < parse->sim_width)
+    //     {
+    //         printf("%d", visited[i][j]);
+    //         j++;
+    //     }
+    //     printf("\n");
+    //     i++;
+    // }
+    // printf("KHRJAAAAAAAAAAAAAAAAAAAAAAAT\n");
     while (i < parse->sim_height)
     {
         free(visited[i]);
@@ -470,14 +485,80 @@ void    ft_check_map_closed(t_parse *parse)
     free(visited);
 }
 
-int ft_edges_checker(char **map, int i, int j)
+// int ft_edges_checker(char **map, int i, int j)
+// {
+//     // printf("map[i][j]: %c ---- i:%d ----j:%d\n", map[i][j], i, j);
+//     // printf("hahahahah\n");
+//     // if ((ft_standard_isspace(map[i][j + 1]) == 1) || (ft_standard_isspace(map[i][j - 1]) == 1) ||
+//     //     (ft_standard_isspace(map[i + 1][j]) == 1) || (ft_standard_isspace(map[i - 1][j]) == 1))
+//     //         return (1);
+//     if (j == 0)
+//     {
+//         if (i == 0)
+//         {
+//             if ((ft_standard_isspace(map[i][j + 1]) == 1 || ft_standard_isspace(map[i + 1][j]) == 1))
+//                 return (1);
+//         }
+//         else if ((size_t)i == (ft_strlen(map[i]) - 1))
+//         {
+//             if (ft_standard_isspace(map[i][j + 1]) == 1 || (ft_standard_isspace(map[i - 1][j]) == 1))
+//                 return (1);
+//         }
+//         else
+//         if ((ft_standard_isspace(map[i][j + 1]) == 1 || ft_standard_isspace(map[i + 1][j]) == 1) || (ft_standard_isspace(map[i - 1][j]) == 1))
+//             return (1);
+//     }
+//     else if ((size_t)j == (ft_strlen(map[i]) - 1))
+//     {
+//         if (i == 0)
+//         {
+//             if ((ft_standard_isspace(map[i][j - 1]) == 1 || ft_standard_isspace(map[i + 1][j]) == 1))
+//                 return (1);
+//         }
+//         else if ((size_t)i == (ft_strlen(map[i]) - 1))
+//         {
+//             if ((ft_standard_isspace(map[i][j - 1]) == 1 || ft_standard_isspace(map[i - 1][j]) == 1))
+//                 return (1);
+//         }
+//         else
+//         if ((ft_standard_isspace(map[i][j - 1]) == 1 || ft_standard_isspace(map[i + 1][j]) == 1) || ft_standard_isspace(map[i - 1][j]) == 1)
+//             return (1);
+//     }
+//     else
+//     {
+//         if (i == 0)
+//         {
+//             if ((ft_standard_isspace(map[i][j + 1]) == 1 || ft_standard_isspace(map[i + 1][j]) == 1) || (ft_standard_isspace(map[i][j - 1]) == 1))
+//                 return (1);
+//         }
+//         else if ((size_t)i == (ft_strlen(map[i]) - 1))
+//         {
+//             if ((ft_standard_isspace(map[i][j + 1]) == 1 || ft_standard_isspace(map[i - 1][j]) == 1) || (ft_standard_isspace(map[i][j - 1]) == 1))
+//                 return (1);
+//         }
+//         else
+//         if ((ft_standard_isspace(map[i][j + 1]) == 1 || ft_standard_isspace(map[i + 1][j]) == 1) || (ft_standard_isspace(map[i][j - 1]) == 1) || (ft_standard_isspace(map[i - 1][j]) == 1))
+//             return (1);
+//     }
+//     return (0);
+// }
+
+int ft_edges_checker(t_parse *parse, int i, int j)
 {
-    // printf("map[i][j]: %c ---- i:%d ----j:%d\n", map[i][j], i, j);
-    // printf("hahahahah\n");
-    if ((ft_standard_isspace(map[i][j + 1]) == 1) || (ft_standard_isspace(map[i][j - 1]) == 1) ||
-        (ft_standard_isspace(map[i + 1][j]) == 1) || (ft_standard_isspace(map[i - 1][j]) == 1))
-            return (1);
-    return (0);
+    if (i == 0 || i == parse->sim_height || j == 0 || j == parse->sim_width)
+    {
+        // If the current cell is on the edge of the map
+        if (i > 0 && ft_standard_isspace(parse->sim[i - 1][j])) return 1;
+        if (j > 0 && ft_standard_isspace(parse->sim[i][j - 1])) return 1;
+        if (i < parse->sim_height && ft_standard_isspace(parse->sim[i + 1][j])) return 1;
+        if (j < parse->sim_width && ft_standard_isspace(parse->sim[i][j + 1])) return 1;
+        return 0;
+    }
+    else
+    {
+        // If the current cell is not on the edge of the map
+        return 0;
+    }
 }
 
 void    ft_dfs(t_parse *parse, int **visited, int i, int j, int *flag)
@@ -491,7 +572,7 @@ void    ft_dfs(t_parse *parse, int **visited, int i, int j, int *flag)
         visited[i][j] = 1;
         return ;
     }
-    if (parse->sim[i][j] == '0' && (ft_edges_checker(parse->sim, i, j) == 1))
+    if (parse->sim[i][j] == '0' && (ft_edges_checker(parse, i, j) == 1))
     {
         *flag = 1;
         return ;
@@ -559,7 +640,9 @@ void    ft_insert_simulation(t_parse *parse)
         k++;
         parse->s_cor->x++;
     }
-    // // print the simulation
+    // print the simulation
+    // printf("------------------\n");
+    // printf("PRINT THE SIMULATION\n");
     // k = 0;
     // while (k < i)
     // {
@@ -572,6 +655,7 @@ void    ft_insert_simulation(t_parse *parse)
     //     printf("\n");
     //     k++;
     // }
+    // printf("------------------\n");
     parse->sim_height = i;
     parse->sim_width = j;
 }
