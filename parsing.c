@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/23 11:26:47 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/23 13:08:03 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ t_parse ft_parse(char **arg, t_parse *parse)
     ft_read_file(arg[1], parse);
     // ft_print_map(parse);
     ft_check_map(parse);
+    printf("player x position:%d\n", parse->player_x);
+    printf("player y position:%d\n", parse->player_y);
+    printf("player direction:%c\n", parse->player_dir);
+    printf("YOU WOOOOOOOOOOON________________YOU ROOOOOOCK\n");
     return (*parse);
 }
 
@@ -152,8 +156,6 @@ void    ft_check_map(t_parse *parse)
 
 void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j)
 {
-    // printf("DAAAAAAAAAAYZ\n");
-    // printf("i:%d\tj:%d\n", i, j);
     // printf("map string in i index:%s\n", parse->map[i]);
     parse->s_cor->x = i;
     parse->s_cor->y = j;
@@ -161,28 +163,53 @@ void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j)
     // // ft_isspace_2D(parse->map, parse->s_cor);
     // i = parse->s_cor->x;
     // j = parse->s_cor->y;
-    while (parse->map[i][j])
+    //     // print the simulation
+    // int l;
+    // printf("------------------\n");
+    // printf("PRINT THE SIMULATION\n");
+    // while (i < parse->sim_height)
+    // {
+    //     l = 0;
+    //     while (l < parse->sim_width)
+    //     {
+    //         printf("%c", parse->sim[i][l]);
+    //         l++;
+    //     }
+    //     printf("\n");
+    //     i++;
+    // }
+    // printf("------------------\n");
+    // printf("sim height:%d\n", parse->sim_height);
+    // printf("sim width:%d\n", parse->sim_width);
+    i = 0;
+    while (i < parse->sim_height)
     {
-        if (parse->map[i][j] == '0' || parse->map[i][j] == '1' || parse->map[i][j] == ' ' || parse->map[i][j] == '\t')
-            j++;
-        if (parse->map[i][j] == '\n')
+        j = 0;
+        while (j < parse->sim_width)
         {
-            i++;
-            j = 0;
-        }
-        if (parse->map[i][j] == 'N' || parse->map[i][j] == 'S' || parse->map[i][j] == 'W' || parse->map[i][j] == 'E')
-        {
-            if (tab[(unsigned int)ft_tolower(parse->map[i][j])] == 1)
-                ft_error("Error\nDuplicate player position\n");
-            else if (tab[(unsigned int)ft_tolower(parse->map[i][j])] == 0)
-            {
-                tab[(unsigned int)ft_tolower(parse->map[i][j])] = 1;
-                parse->player_x = i;
-                parse->player_y = j;
-                parse->player_dir = parse->map[i][j];
+            if (parse->sim[i][j] == '0' || parse->sim[i][j] == '1' || parse->sim[i][j] == ' ' || parse->sim[i][j] == '\t')
                 j++;
+            else if (parse->sim[i][j] == 'N' || parse->sim[i][j] == 'S' || parse->sim[i][j] == 'W' || parse->sim[i][j] == 'E')
+            {
+                if (tab[(unsigned int)'n'] == 1 || tab[(unsigned int)'s'] == 1 || tab[(unsigned int)'w'] == 1 ||
+                    tab[(unsigned int)'e'] == 1)
+                    ft_error("Error\nDuplicate player position\n");
+                else if (tab[(unsigned int)ft_tolower(parse->map[i][j])] == 0)
+                {
+                    tab[(unsigned int)ft_tolower(parse->sim[i][j])] = 1;
+                    parse->player_x = i;
+                    parse->player_y = j;
+                    parse->player_dir = parse->sim[i][j];
+                    j++;
+                }
+            }
+            else if (parse->sim[i][j] == '\0')
+            {
+                i++;
+                j = 0;
             }
         }
+        i++;
     }
     if (tab[(unsigned int)'n'] == 0 && tab[(unsigned int)'s'] == 0 && tab[(unsigned int)'w'] == 0 && tab[(unsigned int)'e'] == 0)
         ft_error("Error\nNo player position\n");
@@ -247,21 +274,21 @@ void    ft_check_map_closed(t_parse *parse)
         }
         i++;
     }
-    printf("KHRJAAAAAAAAAAAAAAAAAAAAAAAT\n");
-    // print visited map
-    i = 0;
-    while (i < parse->sim_height)
-    {
-        j = 0;
-        while (j < parse->sim_width)
-        {
-            printf("%d", visited[i][j]);
-            j++;
-        }
-        printf("\n");
-        i++;
-    }
-    printf("KHRJAAAAAAAAAAAAAAAAAAAAAAAT\n");
+    // printf("KHRJAAAAAAAAAAAAAAAAAAAAAAAT\n");
+    // // print visited map
+    // i = 0;
+    // while (i < parse->sim_height)
+    // {
+    //     j = 0;
+    //     while (j < parse->sim_width)
+    //     {
+    //         printf("%d", visited[i][j]);
+    //         j++;
+    //     }
+    //     printf("\n");
+    //     i++;
+    // }
+    // printf("KHRJAAAAAAAAAAAAAAAAAAAAAAAT\n");
     if (flag == 1)
         ft_error("Error\nMap is not closed\n");
     i = 0;
