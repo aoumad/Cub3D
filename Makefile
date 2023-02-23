@@ -1,8 +1,8 @@
 NAME = cub3d
 
-SRC		=	main.c parsing.c parsing_utils.c  parsing2.c init.c GNL/get_next_line.c GNL/get_next_line_utils.c \
-			libft/ft_strdup.c \
-			libft/ft_isdigit.c libft/ft_split.c libft/ft_strjoin.c libft/ft_tolower.c libft/ft_substr.c
+SRC		=	main.c parsing.c parsing_utils.c  parsing2.c init.c GNL_utils/get_next_line.c GNL_utils/get_next_line_utils.c \
+			libft_utils/ft_strdup.c \
+			libft_utils/ft_isdigit.c libft_utils/ft_split.c libft_utils/ft_strjoin.c libft_utils/ft_tolower.c libft_utils/ft_substr.c
 
 CC 		= gcc
 

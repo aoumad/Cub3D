@@ -6,8 +6,8 @@ EA ./texture/BRICK_4D.xpm
         WE        ./texture/BRICK_4E.xpm
 
 
-F 18         ,           16        ,            14
-C 135,    206,      235        
+        F 18         ,           16        ,            14
+C 135,    206,                          253        
                           
 
 

@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/23 13:08:03 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/23 18:39:41 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,15 @@ void    ft_print_map(t_parse *parse);
 t_parse ft_parse(char **arg, t_parse *parse)
 {
     init_data(parse);
-    ft_check_arg(arg);
+    ft_check_arg(parse, arg);
     ft_read_file(arg[1], parse);
-    // ft_print_map(parse);
     ft_check_map(parse);
-    printf("player x position:%d\n", parse->player_x);
-    printf("player y position:%d\n", parse->player_y);
-    printf("player direction:%c\n", parse->player_dir);
-    printf("YOU WOOOOOOOOOOON________________YOU ROOOOOOCK\n");
     return (*parse);
 }
 
 void    ft_print_map(t_parse *parse)
 {
     int i = 0;
-    
     while (parse->map[i])
     {
         printf("%s\n", parse->map[i]);
@@ -49,7 +43,7 @@ void    ft_read_file(char *file, t_parse *parse)
     i = 0;
     fd = open(file, O_RDONLY);
     if (fd == -1)
-        ft_error("Error\nopen() failed\n");
+        ft_error(parse, "Error\nopen() failed\n");
     line = get_next_line(fd);
     buf = ft_strdup("");
     while (line)
@@ -67,42 +61,35 @@ void    ft_duplicate_pattern(int *tab, char *map, int flag, t_parse *parse, int 
 {
     t_index index;
     int i;
-    
     index.i = 0;
     index.j = 0;
     i = 0;
-    ft_mark_texture_path(tab, map, flag, j);
+    ft_mark_texture_path(parse, tab, map, flag, j);
     if (flag == NO || flag == SO || flag == WE || flag == EA)
     {
         i = ft_isspace(map, j);
         if (i == 0)
-            ft_error("Error\nInvalid pattern\n");
+            ft_error(parse, "Error\nInvalid pattern\n");
         ft_check_texture_path(parse, map, flag, i);
         // ft_read_texture_path(parse, flag);
     }
     else if (flag == F_FLAG || flag == C_FLAG)
     {
-        // i should put this incrmeneting structure in an indepent function
-        // ga3 makhdama hadi !!!!!!!!!!!!!!!!
-        index.i = ft_isspace_no_n(map, index.i); // to increment the spaces before 'F' or 'C'
-        if (map[i] == 'F' || map[i] == 'C')
-            index.i = ft_isspace_no_n(map, ++index.i); // to increment the spaces after the 'F' or 'C';
-        // printf("after first isspace i:%d\n", index.i);
-        // printf("------> index i: %d\n", index.i);
-        // printf("after second isspace i:%d\n", index.i);
+        index.i = ft_isspace_no_n(map, j); // to increment the spaces after 'F' or 'C'
         if (index.i == 0)
-            ft_error("Error\nInvalid pattern\n");
+            ft_error(parse, "Error\nInvalid pattern\n");
         index.j = j;
         ft_check_color(index, 0, map, flag, parse);
+        //print numbers
         // if (flag == F_FLAG)
         // {
         //     for (int i = 0; i < 3; i++)
-        //         printf("f color in index:%d\tis:%d\n", i+1, parse->f[i]);
+        //         printf("F[%d] = %d\n", i, parse->f[i]);
         // }
-        // if (flag == C_FLAG)
+        // else if (flag == C_FLAG)
         // {
         //     for (int i = 0; i < 3; i++)
-        //         printf("c color in index:%d\tis:%d\n", i+1, parse->c[i]);
+        //         printf("C[%d] = %d\n", i, parse->c[i]);
         // }
     }
 }
@@ -132,12 +119,11 @@ void    ft_check_map(t_parse *parse)
     i = 0;
     j = 0;
     if (parse->map == NULL)
-        ft_error("Error\nEmpty map\n");
+        ft_error(parse, "Error\nEmpty map\n");
     // ft_print_map(parse);
     while (parse->map[i])
     {
         j = 0;
-        printf("%s\n", parse->map[i]);
         j = ft_isspace_no_n(parse->map[i], j);
         if (parse->map[i][j] == 'N' || parse->map[i][j] == 'S' || parse->map[i][j] == 'W' ||
             parse->map[i][j] == 'C' || parse->map[i][j] == 'E' || parse->map[i][j] == 'F')
@@ -148,39 +134,15 @@ void    ft_check_map(t_parse *parse)
         i++;
     }
     parse->s_cor->x = i;
-    // printf("before s_cor->i = %d\n", parse->s_cor->x);
-    // printf("befores_cor->y = %d\n", parse->s_cor->y);
     ft_half_done(tab, parse);
     ft_second_half_checker(parse, tab, ++i, j);
 }
 
 void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j)
 {
-    // printf("map string in i index:%s\n", parse->map[i]);
     parse->s_cor->x = i;
     parse->s_cor->y = j;
     ft_check_map_closed(parse);
-    // // ft_isspace_2D(parse->map, parse->s_cor);
-    // i = parse->s_cor->x;
-    // j = parse->s_cor->y;
-    //     // print the simulation
-    // int l;
-    // printf("------------------\n");
-    // printf("PRINT THE SIMULATION\n");
-    // while (i < parse->sim_height)
-    // {
-    //     l = 0;
-    //     while (l < parse->sim_width)
-    //     {
-    //         printf("%c", parse->sim[i][l]);
-    //         l++;
-    //     }
-    //     printf("\n");
-    //     i++;
-    // }
-    // printf("------------------\n");
-    // printf("sim height:%d\n", parse->sim_height);
-    // printf("sim width:%d\n", parse->sim_width);
     i = 0;
     while (i < parse->sim_height)
     {
@@ -193,7 +155,7 @@ void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j)
             {
                 if (tab[(unsigned int)'n'] == 1 || tab[(unsigned int)'s'] == 1 || tab[(unsigned int)'w'] == 1 ||
                     tab[(unsigned int)'e'] == 1)
-                    ft_error("Error\nDuplicate player position\n");
+                    ft_error(parse, "Error\nDuplicate player position\n");
                 else if (tab[(unsigned int)ft_tolower(parse->map[i][j])] == 0)
                 {
                     tab[(unsigned int)ft_tolower(parse->sim[i][j])] = 1;
@@ -212,7 +174,7 @@ void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j)
         i++;
     }
     if (tab[(unsigned int)'n'] == 0 && tab[(unsigned int)'s'] == 0 && tab[(unsigned int)'w'] == 0 && tab[(unsigned int)'e'] == 0)
-        ft_error("Error\nNo player position\n");
+        ft_error(parse, "Error\nNo player position\n");
 }
 
 void    ft_check_map_closed(t_parse *parse)
@@ -233,12 +195,12 @@ void    ft_check_map_closed(t_parse *parse)
     ft_insert_simulation(parse);
     visited = (int **)malloc(sizeof(int *) * (parse->sim_height)); // deja mzyod 3ndi wa7d donc dik `+1` blach mnha
     if (visited == NULL)
-        ft_error("Error\nMalloc failed\n");
+        ft_error(parse, "Error\nMalloc failed\n");
     while (i < (parse->sim_height))
     {
         visited[i] = (int *)malloc(sizeof(int) * parse->sim_width);
         if (visited[i] == NULL)
-            ft_error("Error\nMalloc failed\n");
+            ft_error(parse, "Error\nMalloc failed\n");
         i++;
     }
     i = 0;
@@ -267,7 +229,7 @@ void    ft_check_map_closed(t_parse *parse)
             if (parse->sim[i][j] == '\n' || parse->sim[i][j] == '\0')
                 break;
             if (parse->sim[i][j] == '0' && (ft_edges_checker(parse, i, j) == 1))
-                ft_error("Error\nMap is not closed\n");
+                ft_error(parse, "Error\nMap is not closed\n");
             // else
                 // need to see if the a texture or another character got in the simulation
             j++;
@@ -290,7 +252,7 @@ void    ft_check_map_closed(t_parse *parse)
     // }
     // printf("KHRJAAAAAAAAAAAAAAAAAAAAAAAT\n");
     if (flag == 1)
-        ft_error("Error\nMap is not closed\n");
+        ft_error(parse, "Error\nMap is not closed\n");
     i = 0;
     while (i < parse->sim_height)
     {
@@ -298,7 +260,7 @@ void    ft_check_map_closed(t_parse *parse)
         while (j < parse->sim_width)
         {
             if (visited[i][j] == 0 && parse->sim[i][j] == '1')
-                ft_error("Error\nMap is not closed\n");
+                ft_error(parse, "Error\nMap is not closed\n");
             j++;
         }
         i++;
@@ -390,10 +352,14 @@ int ft_edges_checker(t_parse *parse, int i, int j)
     if (i == 0 || i == parse->sim_height || j == 0 || j == parse->sim_width)
     {
         // If the current cell is on the edge of the map
-        if (i > 0 && (ft_standard_isspace(parse->sim[i - 1][j]) == 1)) return 1;
-        if (j > 0 && (ft_standard_isspace(parse->sim[i][j - 1]) == 1)) return 1;
-        if (i < parse->sim_height && (ft_standard_isspace(parse->sim[i + 1][j]) == 1)) return 1;
-        if (j < parse->sim_width && (ft_standard_isspace(parse->sim[i][j + 1]) == 1)) return 1;
+        if (i > 0 && (ft_standard_isspace(parse->sim[i - 1][j]) == 1))
+            return 1;
+        if (j > 0 && (ft_standard_isspace(parse->sim[i][j - 1]) == 1))
+            return 1;
+        if (i < parse->sim_height && (ft_standard_isspace(parse->sim[i + 1][j]) == 1))
+            return 1;
+        if (j < parse->sim_width && (ft_standard_isspace(parse->sim[i][j + 1]) == 1))
+            return 1;
         return 0;
     }
     else
@@ -413,8 +379,6 @@ void    ft_dfs(t_parse *parse, int **visited, int i, int j, int *flag)
         return ;
     if (parse->sim[i][j] == '0' && (ft_edges_checker(parse, i, j) == 1))
     {
-        if (i == 2 && j == 1)
-            printf("________________________found_____________\n");
         visited[i][j] = 1;
         *flag = 1;
         return ;
@@ -447,10 +411,7 @@ void    ft_insert_simulation(t_parse *parse)
         }
         i++;
     }
-    printf("index i: %d\n", i);
-    printf("parse->s_cor->x:%d\n", parse->s_cor->x);
     i -= parse->s_cor->x; // 33 - 6 = 26 | i have 27 lines in the simulation
-    printf("index i after the minus operation: %d\n", i);
     // allocate the parse->sim now
     parse->sim = (char **)malloc(sizeof(char *) * i);
     while (k < i)
@@ -466,10 +427,6 @@ void    ft_insert_simulation(t_parse *parse)
         flag = 0;
         while (l < j)
         {
-            // if (parse->map[parse->s_cor->x][l] != '\0')
-            //     parse->sim[k][l] = parse->map[parse->s_cor->x][l];
-            // else
-            //     parse->sim[k][l] = ' ';
             if (flag == 0)
                 if (parse->map[parse->s_cor->x][l] == '\0')
                     flag = 1;

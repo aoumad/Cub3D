@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:30 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/20 23:29:41 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/23 16:57:34 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void    init_data(t_parse *parse)
     init_mlx(parse);
 */
 
-void    ft_check_arg(char **arg)
+void    ft_check_arg(t_parse *parse, char **arg)
 {
     int i;
     int len;
@@ -67,9 +67,9 @@ void    ft_check_arg(char **arg)
     i = 0;
     len = ft_strlen(arg[1]);
     if (len < 4)
-        ft_error("Error\nInvalid file name\n");
+        ft_error(parse, "Error\nInvalid file name\n");
     if (arg[1][len - 1] != 'b' || arg[1][len - 2] != 'u' || arg[1][len - 3] != 'c' || arg[1][len - 4] != '.')
-        ft_error("Error\nInvalid file name\n");
+        ft_error(parse, "Error\nInvalid file name\n");
     if (arg[2])
-        ft_error("Error\nToo many arguments\n");
+        ft_error(parse, "Error\nToo many arguments\n");
 }

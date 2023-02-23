@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/22 12:50:27 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/23 18:37:59 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 #include <limits.h>
 
 #include "mlx.h"
-#include "libft/libft.h"
-#include "GNL/get_next_line.h"
+#include "libft_utils/libft.h"
+#include "GNL_utils/get_next_line.h"
 
 
 #define KEY_ESC 53
@@ -78,10 +78,6 @@
 #define SOUTH 1
 #define WEST 2
 #define EAST 3
-
-#define S 4
-#define F 5
-#define C 6
 
 #define MAX_INT 2147483647
 // typedef struct s_parse;
@@ -163,7 +159,7 @@ void    init_data(t_parse *parse);
 void    ft_helper();
 t_parse ft_parse(char **argv, t_parse *parse);
 void    ft_read_file(char *file, t_parse *parse);
-void    ft_check_arg(char **arg);
+void    ft_check_arg(t_parse *parse, char **arg);
 // void    ft_check_file(char *file, t_parse *parse);
 void    ft_check_map(t_parse *parse);
 void    ft_check_map2(int *tab, char *map, t_parse *parse, int j);
@@ -187,12 +183,11 @@ void    ft_insert_simulation(t_parse *parse);
 // utils functions //
 int     ft_isspace(char *map, int index);
 void    ft_half_done(int *tab, t_parse *parse);
-int	    ft_atoi_color(const char *str, int begin, int end);
-void    ft_isspace_2D(char **map, t_cor *s_cor);
+int     ft_atoi_color(t_parse *parse, const char *str, int begin, int end);
 int     ft_standard_isspace(char c);
 int     ft_edges_checker(t_parse *parse, int i, int j);
-void    ft_error(char *str);
+void    ft_error(t_parse *parse, char *str);
 size_t	ft_strlen_mine(const char *s, int j);
 int     ft_isspace_no_n(char *map, int index);
-void    ft_mark_texture_path(int *tab, char *map, int flag, int j);
+void    ft_mark_texture_path(t_parse *parse, int *tab, char *map, int flag, int j);
 #endif
