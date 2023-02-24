@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/23 18:37:59 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/24 00:48:46 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void    init_data(t_parse *parse);
 void    ft_helper();
 t_parse ft_parse(char **argv, t_parse *parse);
 void    ft_read_file(char *file, t_parse *parse);
-void    ft_check_arg(t_parse *parse, char **arg);
+void    ft_check_arg(char **arg);
 // void    ft_check_file(char *file, t_parse *parse);
 void    ft_check_map(t_parse *parse);
 void    ft_check_map2(int *tab, char *map, t_parse *parse, int j);
@@ -174,6 +174,7 @@ void    ft_check_map_valid_helper(char **map, int x, int y, int *visited);
 void    ft_insert_texture_path(t_parse *parse, char *map, int flag, int i, int len);
 
 void    ft_check_texture_path(t_parse *parse, char *map, int flag, int i);
+void    ft_read_texture(char *map, int i);
 void    ft_check_color(t_index index, int row, char *map, int flag, t_parse *parse);
 void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j);
 void    ft_dfs(t_parse *parse, int **visited, int i, int j, int *flag);
@@ -183,11 +184,13 @@ void    ft_insert_simulation(t_parse *parse);
 // utils functions //
 int     ft_isspace(char *map, int index);
 void    ft_half_done(int *tab, t_parse *parse);
-int     ft_atoi_color(t_parse *parse, const char *str, int begin, int end);
+int     ft_atoi_color(const char *str, int begin, int end);
 int     ft_standard_isspace(char c);
 int     ft_edges_checker(t_parse *parse, int i, int j);
-void    ft_error(t_parse *parse, char *str);
+// void    ft_error(t_parse *parse, char *str);
+void    ft_error(char *str);
 size_t	ft_strlen_mine(const char *s, int j);
 int     ft_isspace_no_n(char *map, int index);
-void    ft_mark_texture_path(t_parse *parse, int *tab, char *map, int flag, int j);
+void    ft_mark_texture_path(int *tab, char *map, int flag, int j);
+int    ft_check_texture_inSim(char *map, int i);
 #endif
