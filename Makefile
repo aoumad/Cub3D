@@ -1,32 +1,74 @@
-NAME = cub3d
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/12/16 07:22:21 by aelabid           #+#    #+#              #
+#    Updated: 2023/02/25 21:27:00 by aoumad           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRC		=	main.c parsing.c parsing_utils.c  parsing2.c init.c GNL_utils/get_next_line.c GNL_utils/get_next_line_utils.c \
-			libft_utils/ft_strdup.c \
-			libft_utils/ft_isdigit.c libft_utils/ft_split.c libft_utils/ft_strjoin.c libft_utils/ft_tolower.c libft_utils/ft_substr.c
+SRC = execution/check_wall.c execution/color_background.c execution/cub3d.c\
+		execution/dda.c execution/get_texture_image.c execution/handle_key.c\
+		execution/init_player.c execution/init.c execution/my_mlx_put.c\
+		execution/open_windows.c execution/rays.c execution/render_image.c\
+		execution/render_recs.c execution/sizes.c execution/rays_util.c \
+		execution/rays_util2.c\
+		pars/main.c pars/parsing.c pars/parsing_utils.c  pars/parsing2.c pars/init.c pars/GNL_utils/get_next_line.c pars/GNL_utils/get_next_line_utils.c \
+		pars/libft_utils/ft_strdup.c \
+		pars/libft_utils/ft_isdigit.c pars/libft_utils/ft_split.c pars/libft_utils/ft_strjoin.c pars/libft_utils/ft_tolower.c pars/libft_utils/ft_substr.c
 
-CC 		= gcc
 
-FLAGS	= -Wall -Wextra -Werror -Ofast -g -fsanitize=address
+OBJ = $(SRC:.c=.o)
 
-# MLXFLAGS = -framework OpenGL -framework Appkit
+NAME = cub3D
 
-# MLX = minilibx/libmlx.a
+# CFLAGS = -Wall -Wextra -Werror
+CC = gcc
 
-OBJS 	= $(SRC:.c=.o)
+# LIBFT = pars/libft/libft.a
 
-$(NAME): $(OBJS)
-	@$(CC) $(FLAGS) $(SRC) -o $(NAME)
+all : $(LIBFT) $(NAME)
 
-all: $(NAME) $(OBJS)
 
-%.o: %.c
-		@$(CC) $(FLAGS) -c $< -o $@
+%.o: %.c pars/parsing.h pars/libft_utils/libft.h pars/libft_utils/get_next_line.h includes/cub3d.h
+	$(CC) $(CFLAGS) -Imlx -c $< -o $@
+	
+$(NAME) : $(OBJ)
+	$(CC) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(LIBFT)
 
-clean:
-	rm -rf $(NAME) $(OBJS)
+$(LIBFT):
+	make -C pars/libft
 
-fclean: clean
+clean :
+	rm -f $(OBJ) 
 
-re: fclean all
+fclean : clean
+	rm -f $(NAME) 
 
-.PHONY: all clean fclean re
+re : fclean all 
+
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mabdelba <mabdelba@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/12/16 07:22:21 by aelabid           #+#    #+#              #
+#    Updated: 2023/01/14 22:30:50 by mabdelba         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# SRC = execution/check_wall.c execution/color_background.c execution/cub3d.c\
+# 		execution/dda.c execution/get_texture_image.c execution/handle_key.c\
+# 		execution/init_player.c execution/init.c execution/my_mlx_put.c\
+# 		execution/open_windows.c execution/rays.c execution/render_image.c\
+# 		execution/render_recs.c execution/sizes.c\
+# 		pars/get_next_line.c pars/get_next_line_utils.c pars/parsing.c pars/parsing_utils.c \
+# 		pars/check_map.c pars/convert_color.c pars/utils_functions.c pars/check_map_utils.c\
+# 		pars/parsing_utls.c pars/parsing_uts.c
+
+
