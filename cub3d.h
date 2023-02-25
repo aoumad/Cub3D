@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/24 00:48:46 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/25 12:55:25 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,58 +30,6 @@
 #include "libft_utils/libft.h"
 #include "GNL_utils/get_next_line.h"
 
-
-#define KEY_ESC 53
-#define KEY_W 13
-#define KEY_A 0
-#define KEY_S 1
-#define KEY_D 2
-#define KEY_LEFT 123
-#define KEY_RIGHT 124
-#define KEY_UP 126
-#define KEY_DOWN 125
-#define KEY_SHIFT 257
-#define KEY_CTRL 256
-
-#define KEY_PRESS 2
-#define KEY_RELEASE 3
-#define KEY_EXIT 17
-
-#define TEX_WIDTH 64
-#define TEX_HEIGHT 64
-
-#define FOV 60
-#define FOV_RAD (FOV * M_PI / 180)
-#define HALF_FOV (FOV / 2)
-#define HALF_FOV_RAD (FOV_RAD / 2)
-#define NUM_RAYS 1200
-#define DIST_PROJ_PLANE ((NUM_RAYS / 2) / tan(HALF_FOV_RAD))
-#define DIST_PROJ_PLANE_SQ (DIST_PROJ_PLANE * DIST_PROJ_PLANE)
-#define TILE_SIZE 64
-#define TILE_SIZE_SQ (TILE_SIZE * TILE_SIZE)
-#define NUM_TILES 8
-#define NUM_TILES_SQ (NUM_TILES * NUM_TILES)
-#define MAP_WIDTH 24
-#define MAP_HEIGHT 24
-#define MAP_SIZE (MAP_WIDTH * MAP_HEIGHT)
-#define MINIMAP_SCALE_FACTOR 0.2
-
-#define NUM_SPRITES 10
-
-#define PLAYER_SPEED 5
-#define ROT_SPEED 3
-
-#define ERROR 0
-#define SUCCESS 1
-
-#define NORTH 0
-#define SOUTH 1
-#define WEST 2
-#define EAST 3
-
-#define MAX_INT 2147483647
-// typedef struct s_parse;
-
 // enum struct
 typedef enum e_flag
 {
@@ -94,25 +42,6 @@ typedef enum e_flag
     WE,
     EA
 }   t_flag;
-
-// mlx struct
-typedef struct s_mlx
-{
-    void    *mlx;
-    void    *win;
-    void    *img;
-    char    *addr;
-    int     bits_per_pixel;
-    int     line_length;
-    int     endian;
-}               t_mlx;
-
-// file descriptor struct
-typedef struct s_fd
-{
-    int     fd;
-    char    *line;
-}               t_fd;
 
 typedef struct s_cor
 {
@@ -129,8 +58,6 @@ typedef struct s_index
 // parsing struct
 typedef struct s_parse
 {
-    int     res_x;
-    int     res_y;
     char    *no;
     char    *so;
     char    *we;
@@ -138,6 +65,9 @@ typedef struct s_parse
     // char    *s;
     int     f[3];
     int     c[3];
+    // merging rgb colors of `f` and `c`
+    int     f_rgb;
+    int     c_rgb;
     char    **map;
     char    **sim;
     int     sim_height;
@@ -147,8 +77,6 @@ typedef struct s_parse
     int     player_x;
     int     player_y;
     char    player_dir;
-    t_mlx   *s_mlx;
-    t_fd    *s_fd;
     t_cor   *s_cor;
     t_index *s_index;
 }               t_parse;
@@ -176,6 +104,8 @@ void    ft_insert_texture_path(t_parse *parse, char *map, int flag, int i, int l
 void    ft_check_texture_path(t_parse *parse, char *map, int flag, int i);
 void    ft_read_texture(char *map, int i);
 void    ft_check_color(t_index index, int row, char *map, int flag, t_parse *parse);
+void    ft_generate_rgb(t_parse *parse, int flag);
+int     ft_create_rgb(int r, int g, int b);
 void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j);
 void    ft_dfs(t_parse *parse, int **visited, int i, int j, int *flag);
 void    ft_insert_color(int row, t_parse *parse, int flag, int num);
