@@ -6,7 +6,7 @@
 #    By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 07:22:21 by aelabid           #+#    #+#              #
-#    Updated: 2023/02/25 21:27:00 by aoumad           ###   ########.fr        #
+#    Updated: 2023/02/27 12:23:41 by aoumad           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC = execution/check_wall.c execution/color_background.c execution/cub3d.c\
 		execution/render_recs.c execution/sizes.c execution/rays_util.c \
 		execution/rays_util2.c\
 		pars/main.c pars/parsing.c pars/parsing_utils.c  pars/parsing2.c pars/init.c pars/GNL_utils/get_next_line.c pars/GNL_utils/get_next_line_utils.c \
-		pars/libft_utils/ft_strdup.c \
+		pars/libft_utils/ft_strdup.c pars/mouse.c \
 		pars/libft_utils/ft_isdigit.c pars/libft_utils/ft_split.c pars/libft_utils/ft_strjoin.c pars/libft_utils/ft_tolower.c pars/libft_utils/ft_substr.c
 
 

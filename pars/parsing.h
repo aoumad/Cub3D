@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/25 16:12:07 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/27 12:19:38 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,6 @@ size_t	ft_strlen_mine(const char *s, int j);
 int     ft_isspace_no_n(char *map, int index);
 void    ft_mark_texture_path(int *tab, char *map, int flag, int j);
 int    ft_check_texture_inSim(char *map, int i);
+
+int	mouse(int x, int y, t_parse *parse);
 #endif

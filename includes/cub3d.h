@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:14:53 by aelabid           #+#    #+#             */
-/*   Updated: 2023/02/25 16:18:22 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/27 12:14:06 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # include <unistd.h>
 # include <math.h>
 # define REC_SIZE 16
+
+// TEST
+# define WIDTH 1000
+# define HEIGHT 1000
 
 typedef struct s_mlx
 {

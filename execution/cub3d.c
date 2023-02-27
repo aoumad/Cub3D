@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:20:05 by aelabid           #+#    #+#             */
-/*   Updated: 2023/02/25 21:20:40 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/27 12:18:26 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	main(int ac, char **av)
 	mlx_hook(g_util.mlx.win_ptr, 2, 0, press_key, NULL);
 	mlx_hook(g_util.mlx.win_ptr, 3, 0, release_key, NULL);
 	mlx_hook(g_util.mlx.win_ptr, 17, 0, quit, NULL);
+	mlx_hook(g_util.mlx.win_ptr, 6, 0, mouse, NULL);;
 	mlx_loop_hook(g_util.mlx.mlx_ptr, handle_keypress, &data);
 	mlx_loop(g_util.mlx.mlx_ptr);
 	// free(g_util.mlx.mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/25 21:44:11 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/27 11:20:59 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@ t_parse ft_parse(char **arg, t_parse *parse)
     ft_check_arg(arg);
     ft_read_file(arg[1], parse);
     ft_check_map(parse);
-    printf("x cor:%d\n", parse->player_x);
-    printf("y cor:%d\n", parse->player_y);
-    printf("player dir:%c\n", parse->player_dir);
     return (*parse);
 }
 
@@ -140,7 +137,7 @@ void    ft_check_map(t_parse *parse)
     }
     parse->s_cor->x = i;
     ft_half_done(tab, parse);
-    ft_second_half_checker(parse, tab, ++i, j);
+    ft_second_half_checker(parse, tab, i, j);
 }
 
 void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j)
@@ -148,6 +145,20 @@ void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j)
     parse->s_cor->x = i;
     parse->s_cor->y = j;
     ft_check_map_closed(parse);
+    // print simulation sim
+    i = 0;
+    j = 0;
+    while (i < parse->sim_height)
+    {
+        j = 0;
+        while (j < parse->sim_width)
+        {
+            printf("%c", parse->sim[i][j]);
+            j++;
+        }
+        printf("\n");
+        i++;
+    }
     i = 0;
     while (i < parse->sim_height)
     {
@@ -170,7 +181,7 @@ void    ft_second_half_checker(t_parse *parse, int *tab, int i, int j)
                     tab[(unsigned int)ft_tolower(parse->sim[i][j])] = 1;
                     parse->player_x = i;
                     parse->player_y = j;
-                    parse->player_dir = parse->sim[i][j];
+                    
                     j++;
                 }
             }
