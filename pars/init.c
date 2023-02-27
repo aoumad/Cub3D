@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:30 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/25 21:08:16 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/27 18:35:48 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	init_data(t_parse *parse)
 {
+	init_tab(parse);
 	parse->no = NULL;
 	parse->so = NULL;
 	parse->we = NULL;
@@ -36,6 +37,15 @@ void	init_data(t_parse *parse)
 	parse->s_index->j = 0;
 	parse->f_rgb = 0;
 	parse->c_rgb = 0;
+}
+
+void	init_tab(t_parse *parse)
+{
+	int	i;
+
+	i = 0;
+	while (i < 256)
+		parse->tab[i++] = 0;
 }
 
 void	ft_check_arg(char **arg)
