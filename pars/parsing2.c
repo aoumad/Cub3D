@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:26:16 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/25 21:12:48 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/28 09:40:01 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,43 +106,4 @@ void	ft_insert_texture_path(t_parse *parse, char *map, int flag, int i, int len)
 		parse->ea = ft_substr(map, i, len);
 	else
 		ft_error("Error\nInvalid texture path\n");
-}
-
-int	ft_check_texture_inSim(char *map, int i)
-{
-	int	cnt;
-	int	cons;
-
-	cnt = 0;
-	cons = 0;
-	while (map[i])
-	{
-		if (map[i] == '1' || map[i] == '0')
-		{
-			cnt++;
-			if (map[i - 1] == '1' || map[i - 1] == '0')
-				cons++;
-			if (cons >= 4)
-				return (1);
-			else
-				cons = 0;
-		}
-		i++;
-	}
-	if (cnt >= 1)
-		return (1);
-	return (0);
-}
-
-void	ft_generate_rgb(t_parse *parse, int flag)
-{
-	if (flag == F_FLAG)
-		parse->f_rgb = ft_create_rgb(parse->f[0], parse->f[1], parse->f[2]);
-	else if (flag == C_FLAG)
-		parse->c_rgb = ft_create_rgb(parse->c[0], parse->c[1], parse->c[2]);
-}
-
-int	ft_create_rgb(int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
 }

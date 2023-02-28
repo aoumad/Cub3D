@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/27 18:26:45 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/28 11:54:57 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,21 @@ void	ft_check_map2(char *map, t_parse *parse, int j)
 		ft_error("Error\nInvalid pattern\n");
 }
 
+// void	ft_check_map(t_parse *parse)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 0;
+// 	j = 0;
+// 	if (parse->map == NULL)
+// 		ft_error("Error\nEmpty map\n");
+// 	ft_check_map_additional(parse, &i, &j);
+// 	parse->s_cor->x = i;
+// 	ft_half_done(parse);
+// 	ft_second_half_checker(parse, i, j);
+// }
+
 void	ft_check_map(t_parse *parse)
 {
     int	i;
@@ -119,7 +134,7 @@ void	ft_check_map(t_parse *parse)
 			&& parse->tab[(unsigned int) 'W'] == 1 && parse->tab[(unsigned int) 'E'] == 1
 			&& parse->tab[(unsigned int) 'F'] == 1 && parse->tab[(unsigned int) 'C'] == 1)
 			break ;
-		else if (ft_check_texture_inSim(parse->map[i], j) == 1)
+		else if (ft_check_texture_in_sim(parse->map[i], j) == 1)
 			ft_error("Error\ntexture inside the simulation\n");
 		else
 			ft_error("Error\nInvalid pattern\n");
@@ -180,3 +195,4 @@ void	ft_second_half_checker(t_parse *parse, int i, int j)
 		&& parse->tab[(unsigned int) 'e'] == 0)
 		ft_error("Error\nNo player position\n");
 }
+

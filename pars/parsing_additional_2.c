@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:59:34 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/27 19:00:17 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/28 09:09:03 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,16 @@ void	ft_insert_simulation(t_parse *parse)
 	int	i;
 	int	j;
 	int	k;
-	int	l;
-	int	flag;
 
-	k = 0;
 	i = parse->s_cor->x;
+	k = 0;
 	j = 0;
-	flag = 0;
+	ft_find_max_width(parse, i, j);
+	ft_fill_sim_array(parse);
+}
+
+void	ft_find_max_width(t_parse *parse, int i, int j)
+{
 	while (parse->map[i])
 	{
 		parse->s_cor->y = 0;
@@ -94,31 +97,7 @@ void	ft_insert_simulation(t_parse *parse)
 		i++;
 	}
 	i -= parse->s_cor->x;
-	parse->sim = (char **)malloc(sizeof(char *) * i);
-	while (k < i)
-	{
-		parse->sim[k] = (char *)malloc(sizeof(char) * j);
-		k++;
-	}
-	k = 0;
-	while (k < i)
-	{
-		l = 0;
-		flag = 0;
-		while (l < j)
-		{
-			if (flag == 0)
-				if (parse->map[parse->s_cor->x][l] == '\0')
-					flag = 1;
-			if (flag == 1)
-				parse->sim[k][l] = ' ';
-			else
-				parse->sim[k][l] = parse->map[parse->s_cor->x][l];
-			l++;
-		}
-		k++;
-		parse->s_cor->x++;
-	}
 	parse->sim_height = i;
 	parse->sim_width = j;
+	ft_malloc_sim(parse);
 }

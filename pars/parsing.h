@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/27 18:58:10 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/02/28 09:43:49 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void    ft_error(char *str);
 size_t	ft_strlen_mine(const char *s, int j);
 int     ft_isspace_no_n(char *map, int index);
 void    ft_mark_texture_path(int *tab, char *map, int flag, int j);
-int    ft_check_texture_inSim(char *map, int i);
+int    ft_check_texture_in_sim(char *map, int i);
 void    ft_mark_second_texture(int *tab, char *map, int j);
 void	ft_mark_first_texture(int *tab, char *map, int j);
 void	ft_malloc_visited(t_parse *parse);
@@ -124,6 +124,11 @@ void	ft_initialize_visited(t_parse *parse);
 int	ft_launch_dfs(t_parse *parse, int flag);
 void	ft_flag_rtn(t_parse *parse, int flag);
 void	ft_free_visited(t_parse *parse);
+void    ft_fill_sim_array(t_parse *parse);
+void    ft_find_max_width(t_parse *parse, int i, int j);
+void	ft_malloc_sim(t_parse *parse);
+void	ft_check_map_additional(t_parse *parse, int *i, int *j);
+int	ft_rtn_tab(t_parse *parse);
 
 int	mouse(int x, int y);
 #endif
