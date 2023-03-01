@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/01 10:50:32 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/01 11:36:40 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,8 @@ void	ft_read_file(char *file, t_parse *parse)
 
 void	ft_duplicate_pattern(char *map, int flag, t_parse *parse, int j)
 {
-	t_index	index;
-	int		i;
+	int	i;
 
-	index.i = 0;
-	index.j = 0;
 	i = 0;
 	ft_mark_texture_path(parse->tab, map, flag, j);
 	if (flag == NO || flag == SO || flag == WE || flag == EA)
@@ -65,11 +62,11 @@ void	ft_duplicate_pattern(char *map, int flag, t_parse *parse, int j)
 	}
 	else if (flag == F_FLAG || flag == C_FLAG)
 	{
-		index.i = ft_isspace_no_n(map, j);
-		if (index.i == 0)
+		parse->s_index->i = ft_isspace_no_n(map, j);
+		if (parse->s_index->i == 0)
 			ft_error("Error\nInvalid pattern\n");
-		index.j = j;
-		ft_check_color(index, 0, map, flag, parse);
+		parse->s_index->j = j;
+		ft_check_color(0, map, flag, parse);
 		ft_generate_rgb(parse, flag);
 	}
 }
@@ -104,56 +101,7 @@ void	ft_check_map(t_parse *parse)
 	ft_check_map_additional(parse, &i, &j);
 	parse->s_cor->x = i;
 	ft_half_done(parse);
-	ft_second_half_checker(parse, i, j);
-}
-
-void	ft_second_half_checker(t_parse *parse, int i, int j)
-{
 	parse->s_cor->x = i;
 	parse->s_cor->y = j;
-	ft_check_map_closed(parse);
-	i = 0;
-	while (i < parse->sim_height)
-	{
-		j = 0;
-		while (j < parse->sim_width)
-		{
-			if (parse->sim[i][j] == '0' || parse->sim[i][j] == '1'
-				|| parse->sim[i][j] == ' ' || parse->sim[i][j] == '\t')
-				j++;
-			else if (parse->sim[i][j] == 'N' || parse->sim[i][j] == 'S'
-				|| parse->sim[i][j] == 'W' || parse->sim[i][j] == 'E')
-			{
-				if (parse->tab[(unsigned int) 'n'] == 1
-					|| parse->tab[(unsigned int) 's'] == 1 
-					|| parse->tab[(unsigned int ) 'w'] == 1
-					|| parse->tab[(unsigned int ) 'e'] == 1)
-						ft_error("Error\nDuplicate player position\n");
-				if (ft_edges_checker(parse, i, j) == 1 || i == 0
-					|| i == parse->sim_height || j == 0
-					|| j == parse->sim_width)
-					ft_error("Error\nPlayer position on the edge\n");
-				else if (parse->tab[(unsigned int)ft_tolower(parse->sim[i][j])] == 0)
-				{
-					parse->tab[(unsigned int)ft_tolower(parse->sim[i][j])] = 1;
-					parse->player_x = i;
-					parse->player_y = j;
-					j++;
-				}
-			}
-			else if (parse->sim[i][j] == '\0')
-			{
-				i++;
-				j = 0;
-			}
-			else
-				ft_error("Error\nInvalid map\n");
-		}
-		i++;
-	}
-	if (parse->tab[(unsigned int) 'n'] == 0
-		&& parse->tab[(unsigned int) 's'] == 0
-		&& parse->tab[(unsigned int) 'w'] == 0
-		&& parse->tab[(unsigned int) 'e'] == 0)
-		ft_error("Error\nNo player position\n");
+	ft_second_half_checker(parse, i, j);
 }

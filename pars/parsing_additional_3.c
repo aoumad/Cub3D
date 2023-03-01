@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 20:20:45 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/28 09:12:32 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/01 13:11:08 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,16 @@ void	ft_malloc_sim(t_parse *parse)
 		parse->sim[i] = (char *)malloc(sizeof(int) * parse->sim_width);
 		i++;
 	}
+}
+
+void	ft_comma_checker(int row, char *map, t_parse *parse)
+{
+	if (row != 2)
+	{
+		while (map[parse->s_index->i] != ',')
+			parse->s_index->i++;
+		if (map[parse->s_index->i++] != ',')
+			ft_error("Error\nno comma after color output\n");
+	}
+	parse->s_index->i = ft_isspace_no_n(map, parse->s_index->i);
 }
