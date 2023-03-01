@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 09:40:01 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/28 11:43:33 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/01 10:49:18 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,25 @@ void	ft_check_map_additional(t_parse *parse, int *i, int *j)
 {
 	while (parse->map[*i])
 	{
+		*j = 0;
 		*j = ft_isspace_no_n(parse->map[*i], *j);
 		if (parse->map[*i][*j] == '\0')
 		{
-			i++;
+			(*i)++;
 			continue ;
 		}
 		if (parse->map[*i][*j] == 'N' || parse->map[*i][*j] == 'S' ||
 			parse->map[*i][*j] == 'W' || parse->map[*i][*j] == 'C' ||
 			parse->map[*i][*j] == 'E' || parse->map[*i][*j] == 'F')
 			ft_check_map2(parse->map[*i], parse, *j);
-		else if (!ft_rtn_tab(parse))
+		else if (ft_rtn_tab(parse) == 1)
 			break ;
 		else if (ft_check_texture_in_sim(parse->map[*i], *j) == 1)
 			ft_error("Error\ntexture inside the simulation\n");
 		else
 			ft_error("Error\nInvalid pattern\n");
-		i++;
+		(*i)++;
 	}
-	        printf("index i:%d\n", *i);
-	    printf("index j:%d\n", *j);
 }
 
 int	ft_rtn_tab(t_parse *parse)
