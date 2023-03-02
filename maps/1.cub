@@ -1,7 +1,7 @@
-WE ./pars/assets/WE.xpm
 EA ./pars/assets/EA.xpm
 NO ./pars/assets/NO.xpm
-SO ./pars/assets/im.xpm
+WE ./pars/assets/WE.xpm
+SO ./pars/assets/WE.xpm
 
 
 F 2, 5, 70

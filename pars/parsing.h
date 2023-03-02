@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/01 13:35:44 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/02 14:25:25 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include <sys/stat.h>
 # include <errno.h>
 # include <limits.h>
-# include "libft_utils/libft.h"
 # include "GNL_utils/get_next_line.h"
 
 typedef enum e_flag
@@ -124,5 +123,15 @@ void	ft_no_player_pos(t_parse *parse);
 void	ft_player_checker(t_parse *parse, int *i, int *j);
 void	ft_comma_checker(int row, char *map, t_parse *parse);
 int		mouse(int x, int y);
+int	ft_tolower(int c);
+char	**ft_split(char const *s, char c);
+char	**fill(char **split, char const *s, char c);
+int	ft_wordcount(char const *s, char c);
+int	wordlen(char const *s, char c);
+void	freememory(char **mem);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strdup(const char *s1);
+int	ft_isdigit(int c);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif
