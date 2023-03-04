@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:14:53 by aelabid           #+#    #+#             */
-/*   Updated: 2023/03/01 14:34:52 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/04 11:19:37 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,4 +161,5 @@ void	vertical_check(double ray_angle);
 double	get_distance(double x, double y);
 void	get_wall_util(double distance_h, double distance_v);
 void	init_data(t_parse *data);
+void	image_check(t_parse *data);
 #endif

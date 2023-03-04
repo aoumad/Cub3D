@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 09:40:01 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/01 13:11:06 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/04 11:38:11 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void	ft_check_map_additional(t_parse *parse, int *i, int *j)
 		else if (ft_rtn_tab(parse) == 1)
 			break ;
 		else if (ft_check_texture_in_sim(parse->map[*i], *j) == 1)
-			ft_error("Error\ntexture inside the simulation\n");
+			ft_error("Error\ntexture inside the simulation\n", parse);
 		else
-			ft_error("Error\nInvalid pattern\n");
+			ft_error("Error\nInvalid pattern\n", parse);
 		(*i)++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:14 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/27 16:04:16 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/04 18:26:17 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void	ft_helper(void)
 	exit(1);
 }
 
-void	ft_error(char *str)
+void	ft_error(char *str, t_parse *parse)
 {
+	ft_free_parsing(parse);
 	printf("%s", str);
 	exit(1);
 }
@@ -46,17 +47,23 @@ int	ft_isspace_no_n(char *map, int index)
 	return (index);
 }
 
-int	ft_atoi_color(const char *str, int begin, int end)
+int	ft_atoi_color(const char *str, int begin, int end, t_parse *parse)
 {
 	int	number;
 
 	number = 0;
+	if (begin == end)
+		ft_error("Error\nInvalid color\n", parse);
 	while (begin < end)
 	{
 		if (str[begin] >= '0' && str[begin] <= '9')
+		{
+			if (begin == 7 && end == 7)
+				printf("entered______________________\n");
 			number = number * 10 + (str[begin++] - 48);
+		}
 		else
-			ft_error("Error\nInvalid color\n");
+			ft_error("Error\nInvalid color\n", parse);
 	}
 	return (number);
 }

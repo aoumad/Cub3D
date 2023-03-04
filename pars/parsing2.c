@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:26:16 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/01 13:19:22 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/04 17:21:01 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,22 @@ void	ft_check_texture_path(t_parse *parse, char *map, int flag, int i)
 		if (map[index.j - 1] == 'm' && map[index.j - 2] == 'p'
 			&& map[index.j - 3] == 'x' && map[index.j - 4] == '.')
 		{
-			ft_read_texture(map, i);
+			ft_read_texture(map, i, parse);
 			index.i = i;
 			ft_insert_texture_path(parse, map, flag, index);
 			return ;
 		}
 	}
-	ft_error("Error\nInvalid texture path\n");
+	ft_error("Error\nInvalid texture path\n", parse);
 }
 
-void	ft_read_texture(char *map, int i)
+void	ft_read_texture(char *map, int i, t_parse *parse)
 {
 	int		fd;
 
 	fd = open(&map[i], O_RDONLY);
 	if (fd == -1)
-		ft_error("Error\nInvalid texture path\n");
+		ft_error("Error\nInvalid texture path\n", parse);
 	return ;
 }
 
@@ -72,9 +72,9 @@ void	ft_check_color(int row, char *map, int flag, t_parse *parse)
 	parse->s_index->j = parse->s_index->i;
 	while (ft_isdigit(map[parse->s_index->i]))
 		parse->s_index->i++;
-	num = ft_atoi_color(map, parse->s_index->j, parse->s_index->i);
+	num = ft_atoi_color(map, parse->s_index->j, parse->s_index->i, parse);
 	if (num < 0 || num > 255)
-		ft_error("Error\nInvalid color\n");
+		ft_error("Error\nInvalid color\n", parse);
 	ft_insert_color(row, parse, flag, num);
 	ft_comma_checker(row, map, parse);
 	if (++row != 3)
@@ -84,7 +84,7 @@ void	ft_check_color(int row, char *map, int flag, t_parse *parse)
 		if (map[parse->s_index->i] == '\0')
 			return ;
 		else
-			ft_error("Error\nInvalid map\n");
+			ft_error("Error\nInvalid map\n", parse);
 	}
 }
 
@@ -100,5 +100,5 @@ void	ft_insert_texture_path(t_parse *parse, char *map,
 	else if (flag == EA)
 		parse->ea = ft_substr(map, index.i, index.j);
 	else
-		ft_error("Error\nInvalid texture path\n");
+		ft_error("Error\nInvalid texture path\n", parse);
 }

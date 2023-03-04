@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:20:05 by aelabid           #+#    #+#             */
-/*   Updated: 2023/02/28 11:50:32 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/04 15:10:32 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	main(int ac, char **av)
 	mlx_loop_hook(g_util.mlx.mlx_ptr, handle_keypress, &data);
 	mlx_loop(g_util.mlx.mlx_ptr);
 	// free(g_util.mlx.mlx_ptr);
+	ft_free_parsing(&data);
 	}
 	else
 		ft_helper();

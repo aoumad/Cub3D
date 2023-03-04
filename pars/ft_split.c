@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 20:26:06 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/01 18:18:20 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/04 12:43:09 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	**fill(char **split, char const *s, char c)
 				freememory(split);
 				return (NULL);
 			}
-			split[k - 1][len] = '\0'; // add null terminator
+			split[k - 1][len] = '\0';
 			i += len;
 		}
 	}

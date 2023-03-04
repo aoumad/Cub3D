@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:56:46 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/27 19:00:02 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/04 12:23:11 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ void	ft_malloc_visited(t_parse *parse)
 	i = 0;
 	parse->visited = (int **)malloc(sizeof(int *) * (parse->sim_height));
 	if (parse->visited == NULL)
-		ft_error("Error\nMalloc failed\n");
+		ft_error("Error\nMalloc failed\n", parse);
 	while (i < (parse->sim_height))
 	{
 		parse->visited[i] = (int *)malloc(sizeof(int) * parse->sim_width);
 		if (parse->visited[i] == NULL)
-			ft_error("Error\nMalloc failed\n");
+			ft_error("Error\nMalloc failed\n", parse);
 		i++;
 	}
 }
@@ -77,7 +77,7 @@ int	ft_launch_dfs(t_parse *parse, int flag)
 			if (parse->sim[i][j] == '\n' || parse->sim[i][j] == '\0')
 				break ;
 			if (parse->sim[i][j] == '0' && (ft_edges_checker(parse, i, j) == 1))
-				ft_error("Error\nMap is not closed\n");
+				ft_error("Error\nMap is not closed\n", parse);
 			j++;
 		}
 		i++;
@@ -92,14 +92,14 @@ void	ft_flag_rtn(t_parse *parse, int flag)
 
 	i = 0;
 	if (flag == 1)
-		ft_error("Error\nMap is not closed\n");
+		ft_error("Error\nMap is not closed\n", parse);
 	while (i < parse->sim_height)
 	{
 		j = 0;
 		while (j < parse->sim_width)
 		{
 			if (parse->visited[i][j] == 0 && parse->sim[i][j] == '1')
-				ft_error("Error\nMap is not closed\n");
+				ft_error("Error\nMap is not closed\n", parse);
 			j++;
 		}
 		i++;

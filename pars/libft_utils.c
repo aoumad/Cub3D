@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 18:08:50 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/01 18:14:12 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/04 18:15:24 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,31 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	char			*s;
-	unsigned int	i;
+	char	*str;
+	int		i;
+	int		j;
 
+	i = -1;
+	j = 0;
+	if (s1 == NULL)
+	{
+		s1 = malloc(sizeof(char) * 1);
+		s1[0] = '\0';
+	}
 	if (!s1 || !s2)
+		return (s1);
+	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!str)
 		return (NULL);
-	s = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!s)
-		return (NULL);
-	i = 0;
-	while (*s1)
-		s[i++] = *(s1++);
-	while (*s2)
-		s[i++] = *(s2++);
-	s[i] = 0;
-	return (s);
+	while (s1[++i])
+		str[i] = s1[i];
+	while (s2[j])
+		str[i++] = s2[j++];
+	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	free(s1);
+	return (str);
 }
 
 int	ft_tolower(int c)
