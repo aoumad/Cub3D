@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:20:05 by aelabid           #+#    #+#             */
-/*   Updated: 2023/03/04 15:10:32 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/05 18:14:31 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	main(int ac, char **av)
 	t_parse	data;
 	// t_map	map;
 	data = ft_parse(av, &data);
-
 	// init_data(&data);
 	// parsing(ac, av, &data, &data);
 	get_sizes(&data);

@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/04 17:46:46 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/05 17:47:30 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	ft_read_file(char *file, t_parse *parse)
 	buf = ft_strdup("");
 	while (line)
 	{
+		if (line[0] == '\n')
+			line = ft_strdup(" \n\0");
 		buf = ft_strjoin(buf, line);
 		free(line);
 		line = get_next_line(fd);

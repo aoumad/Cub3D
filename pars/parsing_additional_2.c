@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:59:34 by aoumad            #+#    #+#             */
-/*   Updated: 2023/02/28 09:09:03 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/05 18:29:09 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	ft_dfs(t_parse *parse, int i, int j, int *flag)
 		return ;
 	if (parse->visited[i][j] == 1)
 		return ;
-	if (parse->sim[i][j] == '0' && (ft_edges_checker(parse, i, j) == 1))
+	if (parse->sim[i][j] == '0' && (i == 0 || i == parse->sim_height - 1
+		|| (ft_edges_checker(parse, i, j) == 1)))
 	{
 		parse->visited[i][j] = 1;
 		*flag = 1;
@@ -76,7 +77,6 @@ void	ft_insert_simulation(t_parse *parse)
 	int	i;
 	int	j;
 	int	k;
-
 	i = parse->s_cor->x;
 	k = 0;
 	j = 0;
@@ -96,8 +96,20 @@ void	ft_find_max_width(t_parse *parse, int i, int j)
 		}
 		i++;
 	}
+	// ft_elemenate_empty_lines(parse, &i);
 	i -= parse->s_cor->x;
 	parse->sim_height = i;
 	parse->sim_width = j;
 	ft_malloc_sim(parse);
+}
+
+void	ft_elemenate_empty_lines(t_parse *parse, int *i)
+{
+	(*i)--;
+	int j;
+
+	j = 0;
+	j = ft_isspace_no_n(parse->map[*i], j);
+	if (parse->map[*i][j] == '\0' && j != 0)
+		ft_elemenate_empty_lines(parse, i);
 }

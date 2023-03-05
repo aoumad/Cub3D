@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:14 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/04 18:26:17 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/05 15:08:10 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,7 @@ int	ft_atoi_color(const char *str, int begin, int end, t_parse *parse)
 	while (begin < end)
 	{
 		if (str[begin] >= '0' && str[begin] <= '9')
-		{
-			if (begin == 7 && end == 7)
-				printf("entered______________________\n");
 			number = number * 10 + (str[begin++] - 48);
-		}
 		else
 			ft_error("Error\nInvalid color\n", parse);
 	}

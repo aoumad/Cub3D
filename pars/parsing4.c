@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:15:50 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/04 18:23:47 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/05 15:09:19 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 void	ft_second_half_checker(t_parse *parse, int i, int j)
 {
 	ft_check_map_closed(parse);
+	i = 0;
 	while (i < parse->sim_height)
 	{
 		j = 0;
-		while (j < parse->sim_width)
+		while (parse->sim[i][j])
 		{
 			ft_check_empty_line(parse, i);
 			if (parse->sim[i][j] == '0' || parse->sim[i][j] == '1'
@@ -32,6 +33,12 @@ void	ft_second_half_checker(t_parse *parse, int i, int j)
 		}
 		i++;
 	}
+	// i = 0;
+	// while (i < parse->sim_height)
+	// {
+	// 	printf("%s\n", parse->sim[i]);
+	// 	i++;
+	// }
 	ft_no_player_pos(parse);
 }
 
@@ -60,6 +67,7 @@ void	ft_player_checker(t_parse *parse, int *i, int *j)
 		parse->tab[(unsigned int)ft_tolower(parse->sim[*i][*j])] = 1;
 		parse->player_x = *i;
 		parse->player_y = *j;
+		parse->player_dir = parse->sim[*i][*j];
 		(*j)++;
 	}
 }

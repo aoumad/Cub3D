@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:56:46 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/04 12:23:11 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/05 18:16:46 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int	ft_launch_dfs(t_parse *parse, int flag)
 				ft_dfs(parse, i, j, &flag);
 			if (parse->sim[i][j] == '\n' || parse->sim[i][j] == '\0')
 				break ;
-			if (parse->sim[i][j] == '0' && (ft_edges_checker(parse, i, j) == 1))
+			if (parse->sim[i][j] == '0' && (i == 0 || i == parse->sim_height - 1
+				|| (ft_edges_checker(parse, i, j) == 1)))
 				ft_error("Error\nMap is not closed\n", parse);
 			j++;
 		}
