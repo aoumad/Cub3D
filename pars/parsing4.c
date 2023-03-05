@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:15:50 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/05 15:09:19 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/05 20:21:28 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	ft_player_checker(t_parse *parse, int *i, int *j)
 		parse->player_x = *i;
 		parse->player_y = *j;
 		parse->player_dir = parse->sim[*i][*j];
+		parse->sim[*i][*j] = '0';
 		(*j)++;
 	}
 }

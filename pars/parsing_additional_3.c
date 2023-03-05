@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 20:20:45 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/05 18:17:40 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/05 20:59:00 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_fill_sim_array(t_parse *parse)
 	k = 0;
 	while (k < parse->sim_height)
 	{
-		// printf("%s\n", parse->map[parse->s_cor->x]);
 		l = 0;
         while (l < parse->sim_width && parse->map[parse->s_cor->x][l])
         {
@@ -34,13 +33,6 @@ void	ft_fill_sim_array(t_parse *parse)
 		parse->sim[k][l] = '\0';
 		k++;
 		parse->s_cor->x++;
-	}
-	int i = 0;
-	// printf("\n");
-	while (i < parse->sim_height)
-	{
-		printf("%s\n", parse->sim[i]);
-		i++;
 	}
 }
 

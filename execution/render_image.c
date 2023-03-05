@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:58:21 by aelabid           #+#    #+#             */
-/*   Updated: 2023/02/25 21:24:25 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/05 19:33:57 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	render_image(t_parse data)
 {
-	(void)data;
 	if (g_util.mlx.img)
 	{
 		mlx_destroy_image(g_util.mlx.mlx_ptr, g_util.mlx.img);

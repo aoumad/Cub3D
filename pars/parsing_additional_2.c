@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:59:34 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/05 18:29:09 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/05 20:58:05 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	ft_find_max_width(t_parse *parse, int i, int j)
 		}
 		i++;
 	}
-	// ft_elemenate_empty_lines(parse, &i);
+	ft_elemenate_empty_lines(parse, &i);
 	i -= parse->s_cor->x;
 	parse->sim_height = i;
 	parse->sim_width = j;
@@ -105,11 +105,13 @@ void	ft_find_max_width(t_parse *parse, int i, int j)
 
 void	ft_elemenate_empty_lines(t_parse *parse, int *i)
 {
-	(*i)--;
 	int j;
 
 	j = 0;
-	j = ft_isspace_no_n(parse->map[*i], j);
-	if (parse->map[*i][j] == '\0' && j != 0)
+	j = ft_isspace_no_n(parse->map[*i - 1], j);
+	if (parse->map[*i - 1][j] == '\0' && j != 0)
+	{
+		(*i)--;
 		ft_elemenate_empty_lines(parse, i);
+	}
 }

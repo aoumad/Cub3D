@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 15:53:09 by aelabid           #+#    #+#             */
-/*   Updated: 2023/02/25 16:22:57 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/05 20:20:36 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	get_angle(t_parse *map)
 
 void	init_player(t_parse *map)
 {
-	g_util.p.x = (map->player_x * REC_SIZE + 5);
-	g_util.p.y = (map->player_y * REC_SIZE + 5);
+	g_util.p.y = (map->player_x * REC_SIZE + 5);
+	g_util.p.x = (map->player_y * REC_SIZE + 5);
 	g_util.p.turn_dir = 0;
 	g_util.p.walk_dir = 0;
 	get_angle(map);
