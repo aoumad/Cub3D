@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:15:50 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/05 20:21:28 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/06 09:06:55 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,6 @@ void	ft_second_half_checker(t_parse *parse, int i, int j)
 		}
 		i++;
 	}
-	// i = 0;
-	// while (i < parse->sim_height)
-	// {
-	// 	printf("%s\n", parse->sim[i]);
-	// 	i++;
-	// }
 	ft_no_player_pos(parse);
 }
 

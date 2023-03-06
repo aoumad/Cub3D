@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:26 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/05 18:21:28 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/06 12:35:27 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSING_H
 
 # include <stdio.h>
+# include <stddef.h>
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -136,4 +137,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	ft_free_parsing(t_parse *parse);
 void	ft_check_empty_line(t_parse *parse, int i);
 void	ft_elemenate_empty_lines(t_parse *parse, int *i);
+char	*ft_strtrim(char const *s1, char const *set);
+size_t	ft_strlcpy(char *dest, char const *src, size_t size);
+
 #endif

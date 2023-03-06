@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:26:16 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/04 17:21:01 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/06 11:25:36 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_check_texture_path(t_parse *parse, char *map, int flag, int i)
 	int		j;
 
 	j = 0;
+	map = ft_strtrim(map, " ");
+	map = ft_strtrim(map, "\t");
 	if (map[i] == '.' && map[i + 1] == '/')
 	{
 		index.j = ft_strlen_mine(map, i);

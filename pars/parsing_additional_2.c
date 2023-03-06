@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:59:34 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/05 20:58:05 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/06 09:08:44 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,8 @@ void	ft_insert_simulation(t_parse *parse)
 {
 	int	i;
 	int	j;
-	int	k;
+
 	i = parse->s_cor->x;
-	k = 0;
 	j = 0;
 	ft_find_max_width(parse, i, j);
 	ft_fill_sim_array(parse);
@@ -101,17 +100,4 @@ void	ft_find_max_width(t_parse *parse, int i, int j)
 	parse->sim_height = i;
 	parse->sim_width = j;
 	ft_malloc_sim(parse);
-}
-
-void	ft_elemenate_empty_lines(t_parse *parse, int *i)
-{
-	int j;
-
-	j = 0;
-	j = ft_isspace_no_n(parse->map[*i - 1], j);
-	if (parse->map[*i - 1][j] == '\0' && j != 0)
-	{
-		(*i)--;
-		ft_elemenate_empty_lines(parse, i);
-	}
 }

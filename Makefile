@@ -6,7 +6,7 @@
 #    By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 07:22:21 by aelabid           #+#    #+#              #
-#    Updated: 2023/03/05 15:33:48 by aoumad           ###   ########.fr        #
+#    Updated: 2023/03/06 11:01:28 by aoumad           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC = execution/check_wall.c execution/color_background.c execution/cub3d.c\
 		execution/rays_util2.c \
 		pars/parsing_utils_2.c pars/parsing_additional_2.c pars/parsing_additional_3.c pars/parsing4.c\
 		pars/parsing_additional.c pars/parsing.c pars/parsing_utils.c  pars/parsing2.c pars/init.c pars/GNL_utils/get_next_line.c pars/GNL_utils/get_next_line_utils.c \
-		pars/libft_utils.c pars/mouse.c pars/parsing3.c pars/ft_split.c\
+		pars/libft_utils.c pars/mouse.c pars/parsing3.c pars/ft_split.c pars/libft_utils_2.c\
 
 OBJ = $(SRC:.c=.o)
 

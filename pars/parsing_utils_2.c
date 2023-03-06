@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:05:00 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/04 18:01:38 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/06 09:13:20 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,4 @@ void	ft_free_parsing(t_parse *parse)
 		free(parse->s_cor);
 	if (parse->s_index)
 		free(parse->s_index);
-}
-
-void	ft_check_empty_line(t_parse *parse, int i)
-{
-	int	j;
-
-	j = 0;
-	while (parse->sim[i][j] == ' ' || parse->sim[i][j] == '\t')
-			j++;
-	if (j == parse->sim_width)
-		ft_error("Error\nEmpty line\n", parse);
 }

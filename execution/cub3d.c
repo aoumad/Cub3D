@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:20:05 by aelabid           #+#    #+#             */
-/*   Updated: 2023/03/05 18:14:31 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/06 12:00:16 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,33 +51,29 @@ int	press_key(int key)
 int	quit(void)
 {
 	exit(0);
-	return(0);
+	return (0);
 }
-
-
 
 int	main(int ac, char **av)
 {
+	t_parse	data;
+
 	if (ac == 2)
 	{
-	t_parse	data;
-	// t_map	map;
-	data = ft_parse(av, &data);
-	// init_data(&data);
-	// parsing(ac, av, &data, &data);
-	get_sizes(&data);
-	init_info();
-	open_window();
-	init_player(&data);
-	mlx_hook(g_util.mlx.win_ptr, 2, 0, press_key, NULL);
-	mlx_hook(g_util.mlx.win_ptr, 3, 0, release_key, NULL);
-	mlx_hook(g_util.mlx.win_ptr, 17, 0, quit, NULL);
-	mlx_hook(g_util.mlx.win_ptr, 6, 0, mouse, NULL);;
-	mlx_loop_hook(g_util.mlx.mlx_ptr, handle_keypress, &data);
-	mlx_loop(g_util.mlx.mlx_ptr);
-	// free(g_util.mlx.mlx_ptr);
-	ft_free_parsing(&data);
+		data = ft_parse(av, &data);
+		get_sizes(&data);
+		init_info();
+		open_window();
+		init_player(&data);
+		mlx_hook(g_util.mlx.win_ptr, 2, 0, press_key, NULL);
+		mlx_hook(g_util.mlx.win_ptr, 3, 0, release_key, NULL);
+		mlx_hook(g_util.mlx.win_ptr, 17, 0, quit, NULL);
+		mlx_hook(g_util.mlx.win_ptr, 6, 0, mouse, NULL);
+		mlx_loop_hook(g_util.mlx.mlx_ptr, handle_keypress, &data);
+		mlx_loop(g_util.mlx.mlx_ptr);
+		ft_free_parsing(&data);
 	}
 	else
 		ft_helper();
+	return (0);
 }
