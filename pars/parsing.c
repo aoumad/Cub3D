@@ -6,7 +6,7 @@
 /*   By: aoumad <aoumad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:22 by aoumad            #+#    #+#             */
-/*   Updated: 2023/03/05 17:47:30 by aoumad           ###   ########.fr       */
+/*   Updated: 2023/03/06 18:07:15 by aoumad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ void	ft_read_file(char *file, t_parse *parse)
 	int		fd;
 	char	*line;
 	char	*buf;
-	int		i;
 
-	i = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		ft_error("Error\nopen() failed\n", parse);
@@ -39,7 +37,10 @@ void	ft_read_file(char *file, t_parse *parse)
 	while (line)
 	{
 		if (line[0] == '\n')
+		{
+			free(line);
 			line = ft_strdup(" \n\0");
+		}
 		buf = ft_strjoin(buf, line);
 		free(line);
 		line = get_next_line(fd);
@@ -101,7 +102,6 @@ void	ft_check_map(t_parse *parse)
 	if (parse->map == NULL)
 		ft_error("Error\nEmpty map\n", parse);
 	ft_check_map_additional(parse, &i, &j);
-	parse->s_cor->x = i;
 	ft_half_done(parse);
 	parse->s_cor->x = i;
 	parse->s_cor->y = j;
